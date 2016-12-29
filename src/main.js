@@ -1,16 +1,20 @@
-import Vue from 'vue'
-import Quasar from 'quasar'
-import router from './router'
-import App from './App'
 
-Quasar.theme.set(__THEME)
-Vue.use(Quasar) // Install Quasar Framework
+import Vue from 'vue';
+import Quasar from 'quasar';
+import App from 'components/app';
+
+import router from 'src/router';
+import store from 'src/store';
+
+Quasar.theme.set(__THEME);
+Vue.use(Quasar);
 
 Quasar.start(() => {
   /* eslint-disable no-new */
   new Vue({
     el: '#quasar-app',
-    router,
+    store: store,
+    router: router,
     render: h => h(App)
   })
-})
+});

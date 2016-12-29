@@ -13,15 +13,20 @@
     "lint": "eslint --ext .js,.vue src test/unit/specs test/e2e/specs"
   },
   "dependencies": {
+    "axios": "^0.15.3",
     "babel-runtime": "^6.0.0",
+    "cordova-plugin-crosswalk-webview": "^2.2.0",
     "fastclick": "^1.0.6",
+    "lodash": "^4.17.2",
     "material-design-icons": "^3.0.1",
     "moment": "^2.15.0",
     "quasar-framework": "0.x",
     "roboto-fontface": "^0.6.0",
     "velocity-animate": "^1.2.3",
     "vue": "^2.0.0",
-    "vue-router": "^2.0.0"
+    "vue-router": "^2.0.0",
+    "vuelidate": "^0.1.1",
+    "vuex": "^2.0.0"
   },
   "devDependencies": {
     "autoprefixer": "^6.4.0",

@@ -1,0 +1,169 @@
+
+@font-face
+  font-family: PlayRegular
+  src: url(fonts/play/Play-Regular.ttf)
+
+@font-face
+  font-family: PlayBold
+  src: url(fonts/play/Play-Bold.ttf)
+
+
+.desktop .layout-content
+    overflow: auto
+
+.container
+  margin-right: auto
+  margin-left: auto
+  padding-left: 15px
+  padding-right: 15px
+
+@media (min-width: 768px)
+  .container
+    width: 100%
+
+@media (min-width: 992px)
+  .container
+    width: 100%
+
+@media (min-width: 1200px)
+  .container
+    width: 1170px
+
+.container-fluid
+  margin-right: auto
+  margin-left: auto
+  padding-left: 15px
+  padding-right: 15px
+
+.container-reset
+  margin-left: -15px
+  margin-right: -15px
+
+.toolbar.light
+  border-bottom: 1px solid #ddd
+
+.drawer-content
+  .list .list-label
+    font-size: 12px
+    padding: 8px
+    border-bottom: 1px solid rgba(238, 238, 238, 0.65)
+    line-height: normal
+
+.has-text-right
+  text-align: right
+.has-text-left
+  text-align: left
+.has-text-centered
+  text-align: center
+
+.app-content
+  overflow: auto
+  width: 100%
+  padding: 10px
+
+.form-group
+  margin: 0 0 10px 0
+
+.button
+  text-shadow: none !important
+  box-shadow: 0 2px 3px rgba(0,0,0,0.16), 0 1px 3px rgba(0,0,0,0.23)
+
+.button.primary
+  color: #777001
+
+input:not(.no-style), textarea:not(.no-style), .textfield:not(.no-style)
+  padding-left: 8px
+  padding-right: 8px
+  border-width: 1px 1px 2px 1px
+  border-style: solid
+  border-color: rgb(239, 239, 239)
+  background-color: #fff
+  vertical-align: top
+  border-radius: 1px
+  box-shadow: none
+  transition: all .5s ease;
+
+input:not(.no-style):hover, textarea:not(.no-style):hover, .textfield:not(.no-style):hover
+  border-bottom: 2px solid transparent
+  box-shadow: 0 3px 8px 0 rgba(0, 0, 0, 0.09), 0 0 0 1px rgba(0, 0, 0, 0.09)
+  // border-bottom: 2px solid rgba(0, 0, 0, .09)
+
+input:not(.no-style):focus, textarea:not(.no-style):focus, .textfield:not(.no-style):focus
+  box-shadow: 0 3px 8px 0 rgba(0, 0, 0, 0.33), 0 0 0 1px rgba(0, 0, 0, 0.1)
+  // box-shadow: 0 2px 3px rgba(0,0,0,0.26), 0 0 3px rgba(0,0,0,0.33)
+
+.input
+  width: 100%
+.input-bar
+  position: relative
+  display: block
+.input-bar:before, .input-bar:after
+  content: " "
+  background: #f4e211
+  height: 2px
+  width: 0
+  position: absolute
+  bottom: 2px
+  transition: all
+  transition-duration: 300ms
+.input-bar:before
+  left: 50%
+.input-bar:after
+  right: 50%
+.input:focus ~ .input-bar:before, .input:focus ~ .input-bar:after
+  width: 50%
+
+textarea ~ .input-bar:before, textarea ~ .input-bar:after
+  bottom: 5px
+
+.stacked-label label, .floating-label label
+  left: 6px;
+
+.floating-label input:focus ~ label, .floating-label input:valid ~ label, .floating-label textarea:focus ~ label, .floating-label textarea:valid ~ label
+  color: #d4c229
+
+.top-label
+  display: block
+  margin: 0 2px 4px 2px
+
+button.primary.clear, button.primary.outline
+  color: #b5a216
+
+body.desktop button.primary:not(.disabled).clear:hover
+  background: rgba(255, 235, 59, 0.64)
+
+#video-background
+  position: fixed
+  right: 0
+  bottom: 0
+  min-width: 100%
+  min-height: 100%
+  width: auto
+  height: auto
+  z-index: -100
+
+.quasar-login
+  max-width: 500px
+  margin: 30px auto
+  box-shadow: rgba(0, 0, 0, 0.156863) 0px 3px 6px, rgba(0, 0, 0, 0.227451) 0px 3px 6px
+  .quasar-login-button
+    padding 0 30px
+
+.quasar-panel
+  border: 1px solid #E0E0E0
+  border-radius: 2px
+  background: #ffffff
+
+  .quasar-panel-header
+    border-bottom: 1px solid #E0E0E0
+    font-size: 18px
+    padding: 20px
+  .quasar-panel-footer
+    border-top: 1px solid #E0E0E0
+    padding: 10px 10px 0 0
+    text-align: right
+  .quasar-panel-header, .quasar-panel-footer
+    background-color: #fafafa
+
+  .quasar-panel-content
+    padding: 30px 20px
