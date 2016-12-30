@@ -1,18 +1,18 @@
 <template>
-  <quasar-layout>
+  <q-layout>
 
     <div slot="header" class="toolbar">
       <button v-if="hasDrawer" class="hide-on-drawer-visible" @click="openDrawer()">
         <i>menu</i>
       </button>
-      <quasar-toolbar-title :padding="1" class="font-play">
+      <q-toolbar-title :padding="1" class="font-play">
         <app-toolbar :popover="false"></app-toolbar>
-      </quasar-toolbar-title>
+      </q-toolbar-title>
     </div>
 
     <div slot="navigation" class="desktop-only md bg lg">
       <div class="container">
-        <app-header></app-header>
+        <app-header v-if="hasHeader"></app-header>
       </div>
     </div>
 
@@ -20,19 +20,19 @@
 
     <router-view class="app-router-view"></router-view>
 
-  </quasar-layout>
+  </q-layout>
 </template>
 
 <script type="javascript">
-  import { Events } from 'quasar';
+  import {Events} from 'quasar';
 
   import AppToolbar from 'components/@common/toolbar/index.vue';
   import AppHeader from 'components/@common/header/index.vue';
   import AppDrawer from 'components/@common/drawer/index.vue';
 
   export default {
-    name: 'home',
-    props: ['drawer'],
+    name: 'app-layout',
+    props: ['drawer', 'header'],
     components: {
       AppToolbar, AppHeader, AppDrawer
     },
@@ -40,6 +40,9 @@
       hasDrawer () {
         // noinspection JSUnresolvedVariable
         return this.drawer === 'true';
+      },
+      hasHeader () {
+        return this.header === 'true';
       }
     },
     methods: {
@@ -53,5 +56,7 @@
 <style lang="stylus">
   .toolbar.light, .font-play-regular
     font-family: PlayRegular
+  .app-router-view
+    width: 100%
 </style>
 

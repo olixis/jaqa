@@ -1,5 +1,5 @@
 <template>
-  <app-layout drawer="false"></app-layout>
+  <app-layout drawer="false" header="false"></app-layout>
 </template>
 
 <script type="javascript">
@@ -7,7 +7,7 @@
   import { mapActions } from 'vuex';
 
   export default {
-    name: 'home',
+    name: 'auth',
     components: {
       AppLayout
     },

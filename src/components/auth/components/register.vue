@@ -3,19 +3,19 @@
 
     <div class="container">
 
-      <video autoplay loop id="video-background" muted>
+      <video autoplay loop id="video-background" v-bind:class="opaque" muted>
         <source src="statics/videos/445220196.mp4" type="video/mp4">
       </video>
 
-      <div class="quasar-panel quasar-login">
+      <div class="q-panel q-login">
 
-        <div class="quasar-panel-header">
+        <div class="q-panel-header">
           <span class="font-play-regular">
             Nova Conta CSC
           </span>
         </div>
 
-        <div class="quasar-panel-content">
+        <div class="q-panel-content">
 
           <div class="form-group">
             <small class="top-label">Nome</small>
@@ -43,10 +43,10 @@
 
         </div>
 
-        <div class="quasar-panel-footer">
+        <div class="q-panel-footer">
 
           <div class="form-group">
-            <button @click="register" class="button primary quasar-login-button"> Começar </button>
+            <button @click="register" class="button primary q-login-button"> Começar </button>
           </div>
 
         </div>
@@ -65,15 +65,20 @@
       return {
         user: {
           name: '', email: '', password: '', repeat: ''
-        }
+        },
+        isActive: false
       }
     },
     mounted () {
       this.fetch();
     },
+    computed: {
+      opaque () {
+        return this.isActive ? 'opaque' : '';
+      }
+    },
     methods: {
       fetch () {
-        console.log(this.$route.query.email);
         if (this.$route.query.email) {
           this.user.email = this.$route.query.email;
         }
@@ -82,6 +87,8 @@
           // noinspection JSUnresolvedVariable
           this.$refs.autofocus.focus();
         }
+        // noinspection JSUnresolvedVariable
+        this.isActive = true;
       },
       register () {
         Dialog.create({

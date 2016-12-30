@@ -42,7 +42,7 @@
 </template>
 
 <script type="javascript">
-  import homeIndex from './@component';
+  import homeIndex from './abstract';
   import { isEmpty } from 'lodash';
   import { mapGetters, mapActions } from 'vuex';
   // https://monterail.github.io/vuelidate/#validators

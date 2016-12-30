@@ -2,7 +2,7 @@
   <div class="container">
     <br/>
 
-    <table class="quasar-table striped bordered">
+    <table class="q-table striped bordered">
       <thead>
       <tr>
         <th class="text-left">Property</th>
@@ -23,7 +23,7 @@
 
 <script type="javascript">
   import { Platform } from 'quasar';
-  import homeApps from './@component';
+  import homeApps from './abstract';
 
   export default {
     name: 'home-apps',

@@ -65,8 +65,19 @@
   margin: 0 0 10px 0
 
 .button
+  border-radius: 1px !important
   text-shadow: none !important
   box-shadow: 0 2px 3px rgba(0,0,0,0.16), 0 1px 3px rgba(0,0,0,0.23)
+
+a:hover
+  color: #4c7391
+a
+  color: #5b88aa
+  text-decoration: none
+  cursor: pointer
+  outline: 0
+  -webkit-transition: color 0.25s
+  transition: color 0.25s
 
 .button.primary
   color: #777001
@@ -76,7 +87,7 @@ input:not(.no-style), textarea:not(.no-style), .textfield:not(.no-style)
   padding-right: 8px
   border-width: 1px 1px 2px 1px
   border-style: solid
-  border-color: rgb(239, 239, 239)
+  border-color: #e8e5e5
   background-color: #fff
   vertical-align: top
   border-radius: 1px
@@ -84,7 +95,7 @@ input:not(.no-style), textarea:not(.no-style), .textfield:not(.no-style)
   transition: all .5s ease;
 
 input:not(.no-style):hover, textarea:not(.no-style):hover, .textfield:not(.no-style):hover
-  border-bottom: 2px solid transparent
+  border-bottom: 2px solid #e8e5e5
   box-shadow: 0 3px 8px 0 rgba(0, 0, 0, 0.09), 0 0 0 1px rgba(0, 0, 0, 0.09)
   // border-bottom: 2px solid rgba(0, 0, 0, .09)
 
@@ -132,38 +143,28 @@ button.primary.clear, button.primary.outline
 body.desktop button.primary:not(.disabled).clear:hover
   background: rgba(255, 235, 59, 0.64)
 
-#video-background
-  position: fixed
-  right: 0
-  bottom: 0
-  min-width: 100%
-  min-height: 100%
-  width: auto
-  height: auto
-  z-index: -100
-
-.quasar-login
-  max-width: 500px
-  margin: 30px auto
-  box-shadow: rgba(0, 0, 0, 0.156863) 0px 3px 6px, rgba(0, 0, 0, 0.227451) 0px 3px 6px
-  .quasar-login-button
-    padding 0 30px
-
-.quasar-panel
+.q-panel
   border: 1px solid #E0E0E0
   border-radius: 2px
   background: #ffffff
 
-  .quasar-panel-header
+  .q-panel-header
     border-bottom: 1px solid #E0E0E0
     font-size: 18px
     padding: 20px
-  .quasar-panel-footer
+  .q-panel-footer
     border-top: 1px solid #E0E0E0
     padding: 10px 10px 0 0
     text-align: right
-  .quasar-panel-header, .quasar-panel-footer
+  .q-panel-header, .q-panel-footer
     background-color: #fafafa
 
-  .quasar-panel-content
-    padding: 30px 20px
+  .q-panel-content
+    padding: 10px
+
+
+.fade-enter-active, .fade-leave-active
+  transition: opacity .3s
+
+.fade-enter, .fade-leave-active
+  opacity: 0

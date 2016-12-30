@@ -1,19 +1,19 @@
 <template>
-  <quasar-drawer left-side swipe-only ref="leftDrawer">
+  <q-drawer left-side swipe-only ref="leftDrawer">
     <div class="toolbar light">
-      <quasar-toolbar-title :padding="1">
+      <q-toolbar-title :padding="1">
         {{ AppName }}
-      </quasar-toolbar-title>
+      </q-toolbar-title>
     </div>
 
     <div class="list no-border platform-delimiter">
       <!--<hr>-->
       <div class="list-label">Geral</div>
-      <quasar-drawer-link v-for="menu in AppMenu" :to="menu.route" :icon="menu.icon" exact>
+      <q-drawer-link v-for="menu in AppMenu" :to="menu.route" :icon="menu.icon" exact>
         {{ menu.label }}
-      </quasar-drawer-link>
+      </q-drawer-link>
     </div>
-  </quasar-drawer>
+  </q-drawer>
 </template>
 
 <script>

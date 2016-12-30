@@ -5,7 +5,7 @@
 </template>
 
 <script type="javascript">
-  import homeResources from './@component';
+  import homeResources from './abstract';
 
   export default {
     name: 'home-resources',

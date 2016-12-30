@@ -33,7 +33,7 @@
 </template>
 
 <script type="javascript">
-  import homeWhoWeAre from './@component';
+  import homeWhoWeAre from './abstract';
   import { Toast, Dialog } from 'quasar';
 
   export default {

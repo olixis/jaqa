@@ -1,7 +1,9 @@
 <template>
-  <!-- Don't drop "quasar-app" class -->
-  <div id="quasar-app">
-    <router-view></router-view>
+  <!-- Don't drop "q-app" class -->
+  <div id="q-app">
+    <transition name="fade">
+      <router-view></router-view>
+    </transition>
   </div>
 </template>
 

@@ -1,5 +1,5 @@
 <template>
-  <app-layout drawer="true"></app-layout>
+  <app-layout drawer="true" header="true"></app-layout>
 </template>
 
 <script type="javascript">

@@ -17,9 +17,9 @@ module.exports = {
     env: require('./dev.env'),
     cssSourceMap: true,
     // auto open browser or not
-    openBrowser: true,
+    openBrowser: false,
     publicPath: '/',
-    port: 8080,
+    port: 8081,
     // Proxy your API if using any.
     // Also see /build/script.dev.js and search for "proxy api requests"
     // https://github.com/chimurai/http-proxy-middleware
