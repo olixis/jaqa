@@ -1,14 +1,23 @@
 
 // noinspection JSUnresolvedVariable
-import defaults from 'lodash';
 import axios from 'axios';
 
+// noinspection JSUnusedGlobalSymbols
 const settings = {
-  baseURL: 'http://some-domain.com/api/',
-  timeout: 1000,
-  headers: {'X-Custom-Header': 'foobar'}
+  baseURL: 'http://localhost:82/v1/',
+  timeout: 6000,
+  headers: {'X-Custom-Header': 'foobar'},
+  validateStatus: function (status) {
+    return status >= 200 && status < 300;
+  }
 };
 
-export const http = options => axios.create(defaults(settings, options));
+const http = axios.create(settings);
 
-export default http(settings);
+http.interceptors.response.use(function (response) {
+  return response;
+}, function (error) {
+  return Promise.reject(error);
+});
+
+export default http;

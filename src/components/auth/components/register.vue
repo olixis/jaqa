@@ -1,76 +1,85 @@
 <template>
   <div class="app-content">
 
-    <div class="container">
+    <video autoplay loop id="video-background" v-bind:class="opaque" muted>
+      <source src="statics/videos/445220196.mp4" type="video/mp4">
+    </video>
 
-      <video autoplay loop id="video-background" v-bind:class="opaque" muted>
-        <source src="statics/videos/445220196.mp4" type="video/mp4">
-      </video>
+    <div class="q-panel q-login">
 
-      <div class="q-panel q-login">
-
-        <div class="q-panel-header">
+      <div class="q-panel-header">
           <span class="font-play-regular">
             Nova Conta CSC
           </span>
-        </div>
-
-        <div class="q-panel-content">
-
-          <div class="form-group">
-            <small class="top-label">Nome</small>
-            <input v-model="user.name" class="input" ref="autofocus">
-            <div class="input-bar"></div>
-          </div>
-
-          <div class="form-group">
-            <small class="top-label">E-mail</small>
-            <input v-model="user.email" class="input">
-            <div class="input-bar"></div>
-          </div>
-
-          <div class="form-group">
-            <small class="top-label">Senha</small>
-            <input type="password" v-model="user.password" class="input">
-            <div class="input-bar"></div>
-          </div>
-
-          <div class="form-group">
-            <small class="top-label">Confirmação da Senha</small>
-            <input type="password" v-model="user.repeat" class="input">
-            <div class="input-bar"></div>
-          </div>
-
-        </div>
-
-        <div class="q-panel-footer">
-
-          <div class="form-group">
-            <button @click="register" class="button primary q-login-button"> Começar </button>
-          </div>
-
-        </div>
       </div>
 
+      <div class="q-panel-content form p-20-30">
+
+        <div class="field" :options="item('name')"
+             is="f-string" :r="r" @c="c"></div>
+
+        <div class="field" :options="item('email')" v-show="!item('email.hidden')"
+             is="f-string" :r="r" @c="c"></div>
+
+        <div class="field half" :options="item('password')"
+             is="f-password" :r="r" @c="c"></div>
+
+        <div class="field half" :options="item('repeat')"
+             is="f-password" :r="r" @c="c"></div>
+
+        <div class="field half" :options="item('term')"
+             is="f-checkbox" :r="r" @c="c"></div>
+
+      </div>
+
+      <div class="q-panel-footer">
+
+        <div class="form-group">
+          <button @click="register" class="button primary q-login-button"> Começar</button>
+        </div>
+
+      </div>
     </div>
+
+    <pre class="debug" v-if="debug">{{ r }}</pre>
 
   </div>
 </template>
 
 <script type="javascript">
-  import { Dialog, Toast } from 'quasar';
+  // noinspection NpmUsedModulesInstalled
+  import {Dialog, Toast} from 'quasar';
+  import FormDefaults from 'components/@common/form/defaults';
+  import FormAbstract from 'components/@common/form';
+  import FString from 'components/@common/form/fields/string';
+  import FPassword from 'components/@common/form/fields/password';
+  import FCheckbox from 'components/@common/form/fields/checkbox';
+
+  const items = FormDefaults.apply({
+    'name': {name: 'name', label: 'Nome', autofocus: true},
+    'email': {name: 'email', label: 'E-mail'},
+    'password': {name: 'password', label: 'Senha'},
+    'repeat': {name: 'repeat', label: 'Confirmação da Senha'},
+    'term': {name: 'term', label: 'Aceito os termos blá blá, blá', defaults: false}
+  });
 
   export default {
+    extends: FormAbstract,
+    name: 'auth-register',
+    components: {
+      FString, FPassword, FCheckbox
+    },
     data () {
       return {
-        user: {
-          name: '', email: '', password: '', repeat: ''
-        },
-        isActive: false
+        isActive: false,
+        root: 'products',
+        items: items,
+        debug: true
       }
     },
     mounted () {
       this.fetch();
+      this.load();
     },
     computed: {
       opaque () {
@@ -78,27 +87,22 @@
       }
     },
     methods: {
-      fetch () {
+      load () {
         if (this.$route.query.email) {
-          this.user.email = this.$route.query.email;
-        }
-        // noinspection JSUnresolvedVariable
-        if (this.$refs.autofocus) {
-          // noinspection JSUnresolvedVariable
-          this.$refs.autofocus.focus();
+          this.record('email', this.$route.query.email);
         }
         // noinspection JSUnresolvedVariable
         this.isActive = true;
       },
       register () {
-        Dialog.create({
-          title: 'Alert',
-          message: 'Modern HTML5 Single Page Application front-end framework on steroids.'
-        });
+        console.log(!this.item('email.hidden'));
+        this.item('email.hidden', !this.item('email.hidden'));
+        this.item('name.disabled', !this.item('name.disabled'));
+        // Dialog.create({
+        //   title: 'Alerts',
+        //   message: JSON.stringify(this.r)
+        // });
       }
     }
   }
 </script>
-
-<style lang="stylus">
-</style>

@@ -1,97 +1,44 @@
-
 // noinspection JSUnresolvedVariable
-import {each, isFunction, isString, isArray, isUndefined} from 'lodash';
+import {get as Get} from 'lodash';
 
 export default {
-  props: ['model', 'schema', 'disabled'],
-
+  props: ['r', 'options'],
   computed: {
-    value: {
-      cache: false,
-      get () {
-        let val;
-        if (isFunction(this.schema.get)) {
-          val = this.schema.get(this.model);
-        }
-        else if (this.model && this.schema.model) {
-          val = this.$get('model.' + this.schema.model);
-        }
-
-        if (isFunction(this.formatValueToField)) {
-          val = this.formatValueToField(val);
-        }
-
-        return val;
-      },
-
-      set (newValue) {
-        if (isFunction(this.formatValueToModel)) {
-          newValue = this.formatValueToModel(newValue);
-        }
-
-        if (isFunction(this.schema.set)) {
-          this.schema.set(this.model, newValue);
-        }
-        else if (this.schema.model) {
-          this.$set('model.' + this.schema.model, newValue);
-        }
-      }
-    }
-  },
-
-  watch: {
-    value: function (newVal, oldVal) {
-      // console.log('Changed', newVal, oldVal);
-      if (isFunction(this.schema.onChanged)) {
-        this.schema.onChanged(this.model, newVal, oldVal, this.schema);
-      }
-
-      if (this.$parent.options && this.$parent.options.validateAfterChanged === true) {
-        this.validate();
-      }
-    }
-  },
-
-  methods: {
-    validate () {
-      this.clearValidationErrors();
-
-      if (this.schema.validator && this.schema.readonly !== true && this.disabled !== true) {
-
-        let validators = [];
-        if (!isArray(this.schema.validator)) {
-          validators.push(this.schema.validator.bind(this));
-        } else {
-          each(this.schema.validator, (validator) => {
-            validators.push(validator.bind(this));
-          });
-        }
-
-        each(validators, (validator) => {
-          let err = validator(this.value, this.schema, this.model);
-          if (err) {
-            if (isArray(err))
-              Array.prototype.push.apply(this.schema.errors, err);
-            else if (isString(err))
-              this.schema.errors.push(err);
-          }
-        });
-
-      }
-
-      if (isFunction(this.schema.onValidated)) {
-        this.schema.onValidated(this.model, this.schema.errors, this.schema);
-      }
-
-      return this.schema.errors;
+    name () {
+      // noinspection JSUnresolvedFunction
+      return this.get('name');
     },
-
-    clearValidationErrors () {
-      if (isUndefined(this.schema.errors)) {
-        this.$set('schema.errors', []); // Be reactive
-      } else {
-        this.schema.errors.splice(0); // Clear
-      }
+    label () {
+      // noinspection JSUnresolvedFunction
+      return this.get('label');
+    },
+    disabled () {
+      // noinspection JSUnresolvedFunction
+      return this.get('disabled');
+    },
+    value () {
+      return this.r[this.name];
+    }
+  },
+  mounted () {
+    // noinspection JSUnresolvedVariable
+    if (this.get('autofocus') && this.$refs.autofocus) {
+      // noinspection JSUnresolvedVariable
+      this.$refs.autofocus.focus();
+    }
+  },
+  methods: {
+    change (e) {
+      // noinspection JSUnresolvedVariable
+      this.r[this.name] = this.parse(e && e.target ? e.target.value : e);
+      this.$emit('c', this.r)
+    },
+    get (property, fallback) {
+      // noinspection JSUnresolvedVariable
+      return Get(this.options, property, fallback);
+    },
+    parse (value) {
+      return value;
     }
   }
 };

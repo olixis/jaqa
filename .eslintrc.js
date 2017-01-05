@@ -25,4 +25,4 @@ module.exports = {
     'semi': [0, 'never'],
     'indent': 2
   }
-}
+};

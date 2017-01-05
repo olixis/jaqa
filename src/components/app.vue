@@ -8,7 +8,8 @@
 </template>
 
 <script type="javascript">
-  import { mapGetters } from 'vuex';
+  // noinspection NpmUsedModulesInstalled
+  import {mapGetters} from 'vuex';
 
   require('../themes/app.' + __THEME + '.styl')
 

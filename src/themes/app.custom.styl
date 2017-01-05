@@ -85,7 +85,7 @@ a
 input:not(.no-style), textarea:not(.no-style), .textfield:not(.no-style)
   padding-left: 8px
   padding-right: 8px
-  border-width: 1px 1px 2px 1px
+  border-width: 1px
   border-style: solid
   border-color: #e8e5e5
   background-color: #fff
@@ -95,13 +95,16 @@ input:not(.no-style), textarea:not(.no-style), .textfield:not(.no-style)
   transition: all .5s ease;
 
 input:not(.no-style):hover, textarea:not(.no-style):hover, .textfield:not(.no-style):hover
-  border-bottom: 2px solid #e8e5e5
-  box-shadow: 0 3px 8px 0 rgba(0, 0, 0, 0.09), 0 0 0 1px rgba(0, 0, 0, 0.09)
-  // border-bottom: 2px solid rgba(0, 0, 0, .09)
+  border-bottom: 1px solid #e8e5e5;
+  box-shadow: 0 4px 5px 0 rgba(0, 0, 0, 0.11), 0 0 0 1px rgba(0,0,0,0.1);
+
+input:disabled:hover, textarea:disabled:hover, .textfield:disabled:hover
+  border-bottom: 1px dotted #979797;
+  box-shadow: none;
 
 input:not(.no-style):focus, textarea:not(.no-style):focus, .textfield:not(.no-style):focus
   box-shadow: 0 3px 8px 0 rgba(0, 0, 0, 0.33), 0 0 0 1px rgba(0, 0, 0, 0.1)
-  // box-shadow: 0 2px 3px rgba(0,0,0,0.26), 0 0 3px rgba(0,0,0,0.33)
+  border-bottom: 1px solid #e8e5e5;
 
 .input
   width: 100%
@@ -168,3 +171,77 @@ body.desktop button.primary:not(.disabled).clear:hover
 
 .fade-enter, .fade-leave-active
   opacity: 0
+
+body
+  padding: 10px;
+
+pre
+  background: #e8e8e8
+  padding: 10px
+  margin: 10px 0
+  border-radius: 2px
+
+.form
+  display: flex
+  min-width: 300px
+  width: 100%
+  flex-wrap: wrap
+  flex-flow: row wrap
+  .field
+    padding: 5px
+    width: 100%
+    &.half
+      max-width: 50%
+    &.one-quarter
+      max-width: 25%
+    &.two-quarters
+      max-width: 50%
+    &.three-quarters
+      max-width: 75%
+    &.one-fifth
+      max-width: 20%
+    &.two-fifths
+      max-width: 40%
+    &.three-fifths
+      max-width: 60%
+    &.four-fifths
+      max-width: 80%
+  .debug
+    background: #e0e0e0
+    padding: 10px
+    margin: 10px 0
+    border-radius: 2px
+  .form-label
+    font-size: 14px;
+    padding: 2px 0 4px 0;
+
+@media (max-width: 768px)
+  .form
+    .field
+      &.half
+        max-width: 100%
+      &.one-quarter
+        max-width: 100%
+      &.two-quarters
+        max-width: 100%
+      &.three-quarters
+        max-width: 100%
+      &.one-fifth
+        max-width: 100%
+      &.two-fifths
+        max-width: 100%
+      &.three-fifths
+        max-width: 100%
+      &.four-fifths
+        max-width: 100%
+
+.p-5
+  padding: 5px !important;
+.p-10
+  padding: 10px !important;
+.p-20
+  padding: 20px !important;
+.p-30
+  padding: 30px !important;
+.p-20-30
+  padding: 20px 30px !important;
