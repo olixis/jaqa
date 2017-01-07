@@ -6,7 +6,8 @@
     <div v-if="false">
       <q-search v-model="searchModel" class="primary"></q-search>
     </div>
-    <div class="app-toolbar-left app-toolbar-buttons">
+
+    <div v-show="hasMenu" class="app-toolbar-left app-toolbar-buttons">
       <button @click="route('/auth/login')">
         <i class="material-icons">&#xE7FD;</i> Entrar
       </button>
@@ -14,17 +15,14 @@
         <i class="material-icons">help_outline</i> Fale Conosco
       </button>
     </div>
-    <div v-if="popover" class="app-toolbar-left">
+
+    <div v-show="hasPopover" class="app-toolbar-left">
       <button class="material-icons" ref="app-toolbar-popover">
         <i>more_vert</i>
       </button>
       <q-popover anchor-ref="app-toolbar-popover" ref="app_toolbar_popover">
         <div class="list highlight app-popover">
-          <div class="item item-link item-delimiter" v-for="n in 3" @click="$refs.app_toolbar_popover.close()">
-            <div class="item-content">
-              Label
-            </div>
-          </div>
+          <slot name="popover"></slot>
         </div>
       </q-popover>
     </div>
@@ -37,9 +35,15 @@
 
   export default {
     name: 'app-toolbar',
-    props: ['popover'],
+    props: ['left'],
     computed: {
-      ...mapGetters(['AppName'])
+      ...mapGetters(['AppName']),
+      hasPopover () {
+        return this.left === 'popover' || this.left === 'all';
+      },
+      hasMenu () {
+        return this.left === 'menu' || this.left === 'all';
+      }
     },
     methods: {
       route (path) {

@@ -1,8 +1,9 @@
 <template>
   <div>
-    <div class="form-label">{{ label }}</div>
+    <div is="f-label" :label="label" :validator="option('validator')" :error="error"></div>
     <div class="form-input">
-      <input class="input" type="password" v-model="value" :disabled="disabled" @keyup="change">
+      <input v-bind:class="['input', error ? 'has-error' : '']" ref="autofocus" :disabled="disabled"
+             v-model="value" type="password">
       <div class="input-bar"></div>
     </div>
   </div>
@@ -10,12 +11,13 @@
 
 <script>
   import abstract from './abstract';
+  import FLabel from './label';
 
   export default {
     name: 'f-password',
-    extends: abstract
-  }
+    extends: abstract,
+    components: {
+      FLabel
+    }
+  };
 </script>
-
-<style>
-</style>

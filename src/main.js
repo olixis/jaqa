@@ -1,4 +1,3 @@
-
 import Vue from 'vue';
 // noinspection NpmUsedModulesInstalled
 import Quasar from 'quasar';
@@ -14,10 +13,19 @@ Vue.use(Quasar);
 
 Quasar.start(() => {
   /* eslint-disable no-new */
-  new Vue({
+  const href = false;
+
+  const app = new Vue({
     el: '#quasar-app',
     store: store,
     router: router,
     render: h => h(App)
-  })
+  });
+
+  if (href) {
+    window.addEventListener('hashchange', (hash) => {
+      let url = hash.newURL.substr(hash.newURL.indexOf('#') + 1);
+      app.currentView = (url === '/' ? 'main' : url.replace(/\//g, ''));
+    });
+  }
 });

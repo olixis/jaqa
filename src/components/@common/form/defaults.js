@@ -7,11 +7,13 @@ import {defaults} from 'lodash';
  * @constructor
  */
 const Defaults = {
-  properties: {name: '', label: '', hidden: false, disabled: false, autofocus: false, defaults: ''},
+  properties: {name: '', label: '', validator: '', type: '', hidden: false, disabled: false, autofocus: false, defaults: ''},
   apply (items) {
-    for (let a in items) {
-      if (items.hasOwnProperty(a)) {
-        items[a] = defaults(items[a], this.properties);
+    for (let name in items) {
+      if (items.hasOwnProperty(name)) {
+        let item = items[name];
+        item.name = name;
+        items[name] = defaults(item, this.properties);
       }
     }
     return items;

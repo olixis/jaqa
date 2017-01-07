@@ -1,0 +1,4 @@
+/**
+ * Vuex state
+ */
+export default {};

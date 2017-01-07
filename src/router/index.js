@@ -7,6 +7,7 @@ import VueRouter from 'vue-router';
 import { RouterRegister } from './register';
 
 import { router as home } from 'components/home';
+import { router as dashboard } from 'components/dashboard';
 import { router as auth } from 'components/auth';
 
 Vue.use(VueRouter);
@@ -17,6 +18,7 @@ const routes = [
 
 RouterRegister.register(routes, home);
 RouterRegister.register(routes, auth);
+RouterRegister.register(routes, dashboard);
 
 RouterRegister.register(routes, [
   {path: '*', component: 'error/404'}

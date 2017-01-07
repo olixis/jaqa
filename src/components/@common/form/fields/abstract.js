@@ -1,44 +1,88 @@
 // noinspection JSUnresolvedVariable
 import {get as Get} from 'lodash';
+// noinspection NpmUsedModulesInstalled
+import { Events } from 'quasar';
 
 export default {
-  props: ['r', 'options'],
+  inherit: true,
+  props: ['options'],
+  data () {
+    return {
+      record: {},
+      error: '',
+      propagate: true,
+      value: this.parse(this.option('defaults'))
+    }
+  },
   computed: {
     name () {
-      // noinspection JSUnresolvedFunction
-      return this.get('name');
+      return this.option('name');
     },
     label () {
-      // noinspection JSUnresolvedFunction
-      return this.get('label');
+      return this.option('label');
     },
     disabled () {
-      // noinspection JSUnresolvedFunction
-      return this.get('disabled');
-    },
-    value () {
-      return this.r[this.name];
+      return this.option('disabled');
+    }
+  },
+  watch: {
+    /**
+     * @param value
+     */
+    value (value) {
+      if (this.propagate) {
+        this.synchronize(this.parse(value));
+      }
+      this.propagate = true;
     }
   },
   mounted () {
-    // noinspection JSUnresolvedVariable
-    if (this.get('autofocus') && this.$refs.autofocus) {
+    // noinspection JSUnresolvedFunction
+    if (this.option('autofocus') && this.$refs.autofocus) {
       // noinspection JSUnresolvedVariable
       this.$refs.autofocus.focus();
     }
   },
   methods: {
-    change (e) {
-      // noinspection JSUnresolvedVariable
-      this.r[this.name] = this.parse(e && e.target ? e.target.value : e);
-      this.$emit('c', this.r)
+    /**
+     * @param value
+     * @param propagate
+     */
+    synchronize (value, propagate) {
+      const data = {
+        name: this.name,
+        value: (value && value.target) ? value.target.value : value,
+        propagate: propagate
+      };
+      Events.$emit('form-synchronize', data);
     },
-    get (property, fallback) {
+    /**
+     * @param property
+     * @param fallback
+     */
+    option (property, fallback) {
       // noinspection JSUnresolvedVariable
       return Get(this.options, property, fallback);
     },
+    /**
+     * @param value
+     * @returns {*}
+     */
     parse (value) {
       return value;
+    },
+    /**
+     * @param property
+     * @param value
+     */
+    trigger (property, value) {
+      this[property] = value;
+      if (property === 'record' && this.record[this.option('name')] !== this.value) {
+        this.propagate = false;
+        console.log(this.record[this.option('name')], this.value);
+        this.value = this.parse(this.record[this.option('name')]);
+      }
+      this.$nextTick();
     }
   }
 };

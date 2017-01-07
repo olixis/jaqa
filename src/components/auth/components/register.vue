@@ -15,33 +15,28 @@
 
       <div class="q-panel-content form p-20-30">
 
-        <div class="field" :options="item('name')"
-             is="f-string" :r="r" @c="c"></div>
+        <div class="field" :options="item('name')" is="f-string"></div>
 
-        <div class="field" :options="item('email')" v-show="!item('email.hidden')"
-             is="f-string" :r="r" @c="c"></div>
+        <div class="field" :options="item('email')" v-show="!item('email.hidden')" is="f-string"></div>
 
-        <div class="field half" :options="item('password')"
-             is="f-password" :r="r" @c="c"></div>
+        <div class="field half" :options="item('password')" is="f-password"></div>
 
-        <div class="field half" :options="item('repeat')"
-             is="f-password" :r="r" @c="c"></div>
+        <div class="field half" :options="item('repeat')" is="f-password"></div>
 
-        <div class="field half" :options="item('term')"
-             is="f-checkbox" :r="r" @c="c"></div>
+        <div class="field half" :options="item('term')" is="f-checkbox"></div>
 
       </div>
 
       <div class="q-panel-footer">
 
         <div class="form-group">
-          <button @click="register" class="button primary q-login-button"> Começar</button>
+          <button @click="register" class="button primary q-login-button" :disabled="!isValid"> Começar</button>
         </div>
 
       </div>
     </div>
 
-    <pre class="debug" v-if="debug">{{ r }}</pre>
+    <pre class="debug" v-if="debug">{{ errors }}</pre>
 
   </div>
 </template>
@@ -49,18 +44,14 @@
 <script type="javascript">
   // noinspection NpmUsedModulesInstalled
   import {Dialog, Toast} from 'quasar';
-  import FormDefaults from 'components/@common/form/defaults';
-  import FormAbstract from 'components/@common/form';
-  import FString from 'components/@common/form/fields/string';
-  import FPassword from 'components/@common/form/fields/password';
-  import FCheckbox from 'components/@common/form/fields/checkbox';
+  import { FormAbstract, FormDefaults, FString, FPassword, FCheckbox } from 'components/@common/form';
 
   const items = FormDefaults.apply({
-    'name': {name: 'name', label: 'Nome', autofocus: true},
-    'email': {name: 'email', label: 'E-mail'},
-    'password': {name: 'password', label: 'Senha'},
-    'repeat': {name: 'repeat', label: 'Confirmação da Senha'},
-    'term': {name: 'term', label: 'Aceito os termos blá blá, blá', defaults: false}
+    'name': {label: 'Nome', autofocus: true, validator: 'required'},
+    'email': {label: 'E-mail', validator: 'email'},
+    'password': {label: 'Senha', validator: 'password'},
+    'repeat': {label: 'Confirmação da Senha', validator: 'same:password'},
+    'term': {label: 'Aceito os termos blá blá, blá', type: 'boolean', defaults: true}
   });
 
   export default {
@@ -73,8 +64,7 @@
       return {
         isActive: false,
         root: 'products',
-        items: items,
-        debug: true
+        items: items
       }
     },
     mounted () {
@@ -89,19 +79,28 @@
     methods: {
       load () {
         if (this.$route.query.email) {
-          this.record('email', this.$route.query.email);
+          this.set('email', this.$route.query.email);
         }
         // noinspection JSUnresolvedVariable
         this.isActive = true;
       },
+      /**
+       * @param name
+       * @param value
+       * @returns {object}
+       */
+      change (name, value) {
+        // this.record['name'] = this.record['name'] === 'William' ? '' : 'William';
+        // this.item('email.hidden', !this.item('email.hidden'));
+      },
       register () {
-        console.log(!this.item('email.hidden'));
         this.item('email.hidden', !this.item('email.hidden'));
         this.item('name.disabled', !this.item('name.disabled'));
-        // Dialog.create({
-        //   title: 'Alerts',
-        //   message: JSON.stringify(this.r)
-        // });
+        this
+          .action('register')
+            .then(() => {
+              this.route('/dashboard/home');
+            });
       }
     }
   }

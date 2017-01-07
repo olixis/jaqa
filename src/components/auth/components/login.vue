@@ -19,14 +19,11 @@
 
           <div class="column-left form">
 
-            <div class="field" :options="item('login')"
-                 is="f-string" :r="r" @c="c"></div>
+            <div class="field" :options="item('login')" is="f-string"></div>
 
-            <div class="field" :options="item('password')"
-                 is="f-password" :r="r" @c="c"></div>
+            <div class="field" :options="item('password')" is="f-password"></div>
 
-            <div class="field" :options="item('remember')"
-                 is="f-checkbox" :r="r" @c="c"></div>
+            <div class="field" :options="item('remember')" is="f-checkbox"></div>
 
             <div class="field">
               <button @click="login" class="button primary full-width q-login-button"> Entrar</button>
@@ -78,12 +75,7 @@
   import Lang from 'services/lang';
   import Facebook from '../services/facebook';
   import Auth from '../services/auth';
-
-  import FormDefaults from 'components/@common/form/defaults';
-  import FormAbstract from 'components/@common/form';
-  import FString from 'components/@common/form/fields/string';
-  import FPassword from 'components/@common/form/fields/password';
-  import FCheckbox from 'components/@common/form/fields/checkbox';
+  import { FormAbstract, FormDefaults, FString, FPassword, FCheckbox } from 'components/@common/form';
 
   const items = FormDefaults.apply({
     'login': {name: 'login', label: 'Login', autofocus: true},
@@ -138,14 +130,11 @@
                 .then((response) => {
                   dialog(Lang.get('auth', 'successful'));
                 }).catch((response) => {
-                  dialog(Lang.get('auth', 'failed'));
-                });
+          dialog(Lang.get('auth', 'failed'));
+        });
       },
       requestAccess () {
         Facebook.requestAccess();
-      },
-      route (path) {
-        this.$router.push({path})
       }
     }
   }

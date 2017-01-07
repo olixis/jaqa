@@ -2,11 +2,11 @@
   <q-layout>
 
     <div slot="header" class="toolbar">
-      <button v-if="hasDrawer" class="hide-on-drawer-visible" @click="openDrawer()">
+      <button v-if="hasDrawer" @click="toggleDrawer()">
         <i>menu</i>
       </button>
       <q-toolbar-title :padding="1" class="font-play">
-        <app-toolbar :popover="false"></app-toolbar>
+        <app-toolbar :left="left"></app-toolbar>
       </q-toolbar-title>
     </div>
 
@@ -16,7 +16,7 @@
       </div>
     </div>
 
-    <app-drawer v-if="hasDrawer"></app-drawer>
+    <app-drawer v-if="hasDrawer" :drawer="drawer"></app-drawer>
 
     <router-view class="app-router-view"></router-view>
 
@@ -24,6 +24,7 @@
 </template>
 
 <script type="javascript">
+  // noinspection NpmUsedModulesInstalled
   import {Events} from 'quasar';
 
   import AppToolbar from 'components/@common/toolbar/index.vue';
@@ -32,22 +33,21 @@
 
   export default {
     name: 'app-layout',
-    props: ['drawer', 'header'],
+    props: ['drawer', 'header', 'left'],
     components: {
       AppToolbar, AppHeader, AppDrawer
     },
     computed: {
       hasDrawer () {
-        // noinspection JSUnresolvedVariable
-        return this.drawer === 'true';
+        return !!this.drawer;
       },
       hasHeader () {
-        return this.header === 'true';
+        return !!this.header;
       }
     },
     methods: {
-      openDrawer () {
-        Events.$emit('app-drawer.open-left');
+      toggleDrawer () {
+        Events.$emit('app-drawer.toggle-left');
       }
     }
   };

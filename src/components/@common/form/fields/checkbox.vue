@@ -1,7 +1,7 @@
 <template>
   <div>
     <label class="checkbox">
-      <q-checkbox v-model="checked" :disable="disabled"></q-checkbox>
+      <q-checkbox v-model="value" :disable="disabled"></q-checkbox>
       <span class="form-label">{{ label }}</span>
     </label>
   </div>
@@ -13,21 +13,10 @@
   export default {
     name: 'f-checkbox',
     extends: abstract,
-    data () {
-      return {
-        checked: false
-      }
-    },
-    watch: {
-      checked () {
-        this.change(this.checked);
-      },
-      value () {
-        this.checked = !!this.value;
+    methods: {
+      parse (value) {
+        return !!value;
       }
     }
   };
 </script>
-
-<style>
-</style>
