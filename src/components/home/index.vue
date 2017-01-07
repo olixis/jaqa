@@ -1,12 +1,15 @@
 <template>
-  <app-layout drawer="true" header="true"></app-layout>
+  <app-layout drawer="" header="true" left="menu"></app-layout>
 </template>
 
-<script type="javascript">
-  import AppLayout from 'components/@common/layout/index.vue';
+<script type="text/javascript">
+  // noinspection NpmUsedModulesInstalled
   import { mapActions } from 'vuex';
+  import Common from 'components/@common';
+  import AppLayout from 'components/@common/layout/index.vue';
 
   export default {
+    extends: Common,
     name: 'home',
     components: {
       AppLayout

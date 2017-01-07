@@ -4,14 +4,12 @@
   </div>
 </template>
 
-<script type="javascript">
-  import homeResources from './abstract';
+<script type="text/javascript">
+  import HomeAbstract from './abstract';
 
   export default {
+    extends: HomeAbstract,
     name: 'home-resources',
-    extends: {
-      ...homeResources
-    },
     data () {
       return {
         label: 'Recursos'

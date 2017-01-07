@@ -7,7 +7,7 @@
   </div>
 </template>
 
-<script type="javascript">
+<script type="text/javascript">
   // noinspection NpmUsedModulesInstalled
   import {mapGetters} from 'vuex';
 

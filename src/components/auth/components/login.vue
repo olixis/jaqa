@@ -69,13 +69,14 @@
   </div>
 </template>
 
-<script type="javascript">
+<script type="text/javascript">
   // noinspection NpmUsedModulesInstalled
-  import {Dialog, Toast} from 'quasar';
-  import Lang from 'services/lang';
+  //  import {Dialog, Toast} from 'quasar';
+  import {FormAbstract, FormDefaults, FString, FPassword, FCheckbox} from 'components/@common/form';
+
+  // import Lang from 'services/lang';
+  // import Auth from '../services/auth';
   import Facebook from '../services/facebook';
-  import Auth from '../services/auth';
-  import { FormAbstract, FormDefaults, FString, FPassword, FCheckbox } from 'components/@common/form';
 
   const items = FormDefaults.apply({
     'login': {name: 'login', label: 'Login', autofocus: true},
@@ -83,6 +84,7 @@
     'remember': {name: 'remember', label: 'Manter-me conectado'}
   });
 
+  // noinspection ReservedWordAsName
   export default {
     extends: FormAbstract,
     name: 'auth-login',
@@ -120,22 +122,23 @@
         this.isActive = true;
       },
       login () {
-        const dialog = (message) => {
-          Dialog.create({
-            title: Lang.get('auth', 'dialog'),
-            message: message + '[meleca]'
-          });
-        };
-        Auth.login()
-                .then((response) => {
-                  dialog(Lang.get('auth', 'successful'));
-                }).catch((response) => {
-          dialog(Lang.get('auth', 'failed'));
-        });
+        this.route('/dashboard');
+        // const dialog = (message) => {
+        //   Dialog.create({
+        //     title: Lang.get('auth', 'dialog'),
+        //     message: message + '[meleca]'
+        //   });
+        // };
+        // Auth.login()
+        //         .then((response) => {
+        //           dialog(Lang.get('auth', 'successful'));
+        //         }).catch((response) => {
+        //   dialog(Lang.get('auth', 'failed'));
+        // });
       },
       requestAccess () {
         Facebook.requestAccess();
       }
     }
-  }
+  };
 </script>

@@ -9,13 +9,13 @@
   </div>
 </template>
 
-<script>
-  import abstract from './abstract';
+<script type="text/javascript">
+  import FAbstract from './abstract';
   import FLabel from './label';
 
   export default {
+    extends: FAbstract,
     name: 'f-password',
-    extends: abstract,
     components: {
       FLabel
     }

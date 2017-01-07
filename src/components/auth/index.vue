@@ -1,8 +1,8 @@
 <template>
-  <app-layout drawer="false" header="false"></app-layout>
+  <app-layout drawer="" header="" left="menu"></app-layout>
 </template>
 
-<script type="javascript">
+<script type="text/javascript">
   import AppLayout from 'components/@common/layout/index.vue';
   import { mapActions } from 'vuex';
 

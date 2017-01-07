@@ -2,9 +2,11 @@
 import {get as Get} from 'lodash';
 // noinspection NpmUsedModulesInstalled
 import { Events } from 'quasar';
+import Common from 'components/@common';
 
 export default {
-  inherit: true,
+  extends: Common,
+  name: 'f-abstract',
   props: ['options'],
   data () {
     return {

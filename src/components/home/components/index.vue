@@ -41,22 +41,22 @@
   </div>
 </template>
 
-<script type="javascript">
-  import homeIndex from './abstract';
-  import { isEmpty } from 'lodash';
-  import { mapGetters, mapActions } from 'vuex';
-  // https://monterail.github.io/vuelidate/#validators
+<script type="text/javascript">
+  import HomeAbstract from './abstract';
+  import {isEmpty} from 'lodash';
+  import {mapGetters, mapActions} from 'vuex';
 
   export default {
+    extends: HomeAbstract,
     name: 'home-index',
-    extends: {
-      ...homeIndex
-    },
     data () {
       return {
-        email: this.$store.state.home.leadUserEmail,
+        email: '',
         label: 'Home'
       }
+    },
+    mounted () {
+      // this.email: this.$store.state.home.leadUserEmail,
     },
     computed: {
       isDisabled () {

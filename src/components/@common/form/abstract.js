@@ -1,8 +1,9 @@
 // noinspection JSUnresolvedVariable
 import {isUndefined, get as Get, set as Set, isArray} from 'lodash';
 // noinspection NpmUsedModulesInstalled
-import { Events } from 'quasar';
-import { FormValidator } from 'components/@common/form';
+import {Events} from 'quasar';
+import {FormValidator} from 'components/@common/form';
+import Common from 'components/@common';
 
 const api = {
   /**
@@ -34,8 +35,9 @@ const api = {
   }
 };
 
-const form = {
-  name: 'abstract-Form',
+const FormAbstract = {
+  extends: Common,
+  name: 'form-abstract',
   data () {
     return {
       record: {},
@@ -77,7 +79,7 @@ const form = {
     /**
      * @param name
      * @param value
-     * @returns {form}
+     * @returns {FormAbstract}
      */
     synchronize (name, value) {
       this.set(name, value);
@@ -86,7 +88,7 @@ const form = {
     /**
      * @param name
      * @param value
-     * @returns {form}
+     * @returns {FormAbstract}
      */
     set (name, value) {
       this.record[name] = this.format(value, this.item(name + '.type'));
@@ -102,7 +104,7 @@ const form = {
       return Get(this.record, name);
     },
     /**
-     * @returns {form}
+     * @returns {FormAbstract}
      */
     validation () {
       let record = this.clone(this.record);
@@ -121,7 +123,7 @@ const form = {
       return this;
     },
     /**
-     * @returns {form}
+     * @returns {FormAbstract}
      */
     propagate () {
       if (isArray(this.$children)) {
@@ -161,7 +163,7 @@ const form = {
     /**
      * @param path
      * @param set
-     * @returns {form}
+     * @returns {FormAbstract}
      */
     item (path, set) {
       if (isUndefined(set)) {
@@ -171,7 +173,7 @@ const form = {
       return this;
     },
     /**
-     * @returns {form}
+     * @returns {FormAbstract}
      */
     reset () {
       this.record = this.clone(this.schema);
@@ -225,11 +227,8 @@ const form = {
           return !!value;
       }
       return value;
-    },
-    route (path) {
-      this.$router.push({path})
     }
   }
 };
 
-export default form;
+export default FormAbstract;

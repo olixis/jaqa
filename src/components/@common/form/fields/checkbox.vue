@@ -7,12 +7,12 @@
   </div>
 </template>
 
-<script>
-  import abstract from './abstract';
+<script type="text/javascript">
+  import FAbstract from './abstract';
 
   export default {
+    extends: FAbstract,
     name: 'f-checkbox',
-    extends: abstract,
     methods: {
       parse (value) {
         return !!value;

@@ -10,3 +10,5 @@ export { default as FString } from './fields/string.vue';
 export { default as FPassword } from './fields/password.vue';
 
 export { default as FCheckbox } from './fields/checkbox.vue';
+
+export { default as FText } from './fields/text.vue';

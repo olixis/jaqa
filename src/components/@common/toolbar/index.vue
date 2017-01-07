@@ -20,24 +20,29 @@
       <button class="material-icons" ref="app-toolbar-popover">
         <i>more_vert</i>
       </button>
-      <q-popover anchor-ref="app-toolbar-popover" ref="app_toolbar_popover">
+      <q-popover anchor-ref="app-toolbar-popover" ref="appToolbarPopover">
         <div class="list highlight app-popover">
-          <slot name="popover"></slot>
+
+          <div class="item item-link item-delimiter" v-for="menu in popover" @click="openPopover(menu)">
+            <div class="item-content"> {{ menu.label }}</div>
+          </div>
+
         </div>
       </q-popover>
     </div>
   </div>
 </template>
 
-<script type="javascript">
+<script type="text/javascript">
   // noinspection NpmUsedModulesInstalled
-  import {mapGetters} from 'vuex';
+  import {isFunction} from 'lodash';
+  import Common from 'components/@common';
 
   export default {
+    extends: Common,
     name: 'app-toolbar',
-    props: ['left'],
+    props: ['left', 'popover'],
     computed: {
-      ...mapGetters(['AppName']),
       hasPopover () {
         return this.left === 'popover' || this.left === 'all';
       },
@@ -46,14 +51,20 @@
       }
     },
     methods: {
-      route (path) {
-        this.$router.push({path})
+      /**
+       * @param menu
+       */
+      openPopover (menu) {
+        if (isFunction(menu.callback)) {
+          menu.callback();
+        }
+        this.$refs.appToolbarPopover.close();
       }
     }
-  }
+  };
 </script>
 
-<style lang="stylus">
+<style lang="stylus" rel="stylesheet/stylus">
   body.desktop
     .q-header
       padding: 0 30px

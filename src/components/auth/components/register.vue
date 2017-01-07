@@ -23,7 +23,7 @@
 
         <div class="field half" :options="item('repeat')" is="f-password"></div>
 
-        <div class="field half" :options="item('term')" is="f-checkbox"></div>
+        <div class="field" :options="item('term')" is="f-checkbox"></div>
 
       </div>
 
@@ -36,14 +36,12 @@
       </div>
     </div>
 
-    <pre class="debug" v-if="debug">{{ errors }}</pre>
-
   </div>
 </template>
 
-<script type="javascript">
+<script type="text/javascript">
   // noinspection NpmUsedModulesInstalled
-  import {Dialog, Toast} from 'quasar';
+  // import {Dialog, Toast} from 'quasar';
   import { FormAbstract, FormDefaults, FString, FPassword, FCheckbox } from 'components/@common/form';
 
   const items = FormDefaults.apply({
@@ -98,10 +96,13 @@
         this.item('name.disabled', !this.item('name.disabled'));
         this
           .action('register')
-            .then(() => {
-              this.route('/dashboard/home');
-            });
+          .then(() => {
+            this.route('/dashboard/home');
+          });
       }
     }
-  }
+  };
 </script>
+
+<style lang="stylus" rel="stylesheet/stylus">
+</style>

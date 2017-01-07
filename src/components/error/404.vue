@@ -24,7 +24,7 @@
   </div>
 </template>
 
-<script type="javascript">
+<script type="text/javascript">
   export default {
     data () {
       return {
@@ -39,7 +39,7 @@
   };
 </script>
 
-<style lang="stylus">
+<style lang="stylus" rel="stylesheet/stylus">
   .error-page
     .error-code
       height: 50vh

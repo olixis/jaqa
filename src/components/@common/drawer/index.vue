@@ -8,25 +8,27 @@
 
     <div class="list no-border platform-delimiter">
       <!--<hr>-->
-      <div class="list-label">Geral</div>
-      <q-drawer-link v-for="menu in AppMenu" :to="menu.route" :icon="menu.icon" exact>
-        {{ menu.label }}
-      </q-drawer-link>
+      <div v-for="group in AppMenu">
+
+        <div class="list-label">
+          {{ group.label }}
+        </div>
+        <q-drawer-link v-for="menu in group.items" :to="menu.route" :icon="menu.icon" exact>
+          {{ menu.label }}
+        </q-drawer-link>
+
+      </div>
     </div>
   </q-drawer>
 </template>
 
 <script type="text/javascript">
+  import Common from 'components/@common';
   // noinspection NpmUsedModulesInstalled
-  // import Vue from 'vue';
-  // noinspection NpmUsedModulesInstalled
-  import { mapGetters } from 'vuex';
-  // noinspection NpmUsedModulesInstalled
-  import { Events } from 'quasar';
+  import {Events, Utils} from 'quasar';
 
   export default {
-    components: {
-    },
+    extends: Common,
     name: 'app-drawer',
     props: ['drawer'],
     data () {
@@ -35,13 +37,11 @@
       }
     },
     computed: {
-      ...mapGetters(['AppName', 'AppMenu']),
       swipeOnly () {
         return this.drawer === 'swipe-only';
       },
       forceOpen () {
-        return (!this.swipeOnly && this.isOpen) ? 'force-open' : '';
-        // return 'force-open';
+        return (!this.swipeOnly && this.isOpen && Utils.dom.viewport().width > 600) ? 'force-open' : '';
       }
     },
     mounted () {
@@ -61,7 +61,7 @@
   };
 </script>
 
-<style lang="stylus">
+<style lang="stylus" rel="stylesheet/stylus">
   .drawer
     transition: all .3s
     .drawer-content

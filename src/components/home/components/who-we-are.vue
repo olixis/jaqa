@@ -32,15 +32,14 @@
   </div>
 </template>
 
-<script type="javascript">
-  import homeWhoWeAre from './abstract';
-  import { Toast, Dialog } from 'quasar';
+<script type="text/javascript">
+  // noinspection NpmUsedModulesInstalled
+  import { Toast } from 'quasar';
+  import HomeAbstract from './abstract';
 
   export default {
+    extends: HomeAbstract,
     name: 'home-who_we_are',
-    extends: {
-      ...homeWhoWeAre
-    },
     data () {
       return {
         label: 'Quem Somos',

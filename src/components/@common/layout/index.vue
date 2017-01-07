@@ -6,7 +6,7 @@
         <i>menu</i>
       </button>
       <q-toolbar-title :padding="1" class="font-play">
-        <app-toolbar :left="left"></app-toolbar>
+        <app-toolbar :left="left" :popover="popover"></app-toolbar>
       </q-toolbar-title>
     </div>
 
@@ -23,17 +23,19 @@
   </q-layout>
 </template>
 
-<script type="javascript">
+<script type="text/javascript">
   // noinspection NpmUsedModulesInstalled
   import {Events} from 'quasar';
 
+  import Common from 'components/@common';
   import AppToolbar from 'components/@common/toolbar/index.vue';
   import AppHeader from 'components/@common/header/index.vue';
   import AppDrawer from 'components/@common/drawer/index.vue';
 
-  export default {
+  export default{
+    extends: Common,
     name: 'app-layout',
-    props: ['drawer', 'header', 'left'],
+    props: ['drawer', 'header', 'left', 'popover'],
     components: {
       AppToolbar, AppHeader, AppDrawer
     },
@@ -53,9 +55,10 @@
   };
 </script>
 
-<style lang="stylus">
+<style lang="stylus" rel="stylesheet/stylus">
   .toolbar.light, .font-play-regular
     font-family: PlayRegular
+
   .app-router-view
     width: 100%
 </style>

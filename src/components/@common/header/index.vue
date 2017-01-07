@@ -6,21 +6,20 @@
   </q-tabs>
 </template>
 
-<script>
-import { mapGetters } from 'vuex';
+<script type="text/javascript">
+  import Common from 'components/@common';
 
-export default {
-  name: 'app-header',
-  computed: {
-    ...mapGetters(['AppMenu'])
-  }
-}
+  export default{
+    extends: Common,
+    name: 'app-header'
+  };
 </script>
 
-<style lang="stylus" scoped>
+<style lang="stylus" rel="stylesheet/stylus">
+
   .q-tabs.q-navigation
     color: rgba(234, 224, 224, 1)
-    text-shadow :1px 1px 1px rgba(66, 5, 5, 0.48)
+    text-shadow: 1px 1px 1px rgba(66, 5, 5, 0.48)
     background-color: rgb(197, 0, 0) !important
     box-shadow: inset 1px 2px 3px rgba(115, 9, 9, 0.55)
     border-radius: 3px 3px 0 0

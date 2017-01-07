@@ -21,15 +21,14 @@
   </div>
 </template>
 
-<script type="javascript">
+<script type="text/javascript">
+  // noinspection NpmUsedModulesInstalled
   import { Platform } from 'quasar';
-  import homeApps from './abstract';
+  import HomeAbstract from './abstract';
 
   export default {
+    extends: HomeAbstract,
     name: 'home-apps',
-    extends: {
-      ...homeApps
-    },
     data () {
       return {
         platform: Platform.is,

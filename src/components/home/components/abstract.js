@@ -1,32 +1,18 @@
 /**
  * base home components
  */
-import { mapGetters, mapActions } from 'vuex';
+
+import Common from 'components/@common';
 
 export default {
-  computed: {
-    ...mapGetters(['AppName'])
-  },
-  methods: {
-    log (...args) {
-      // console.log(args);
-    },
-    ...mapActions(['changeTitle'])
-  },
-  created () {
-    this.log('created', this.$options.name);
-  },
-  activated () {
-    this.log('activated', this.$options.name);
-  },
-  updated () {
-    this.log('updated', this.$options.name);
+  extends: Common,
+  name: 'home-abstract',
+  data () {
+    return {
+      label: ''
+    }
   },
   mounted () {
-    this.log('mounted', this.$options.name);
     this.changeTitle(this.AppName + ' / ' + this.label);
-  },
-  destroyed () {
-    this.log('destroyed', this.$options.name);
   }
 };
