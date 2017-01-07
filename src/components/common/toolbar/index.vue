@@ -36,7 +36,7 @@
 <script type="text/javascript">
   // noinspection NpmUsedModulesInstalled
   import {isFunction} from 'lodash';
-  import Common from 'components/@common';
+  import Common from 'components/common';
 
   export default {
     extends: Common,

@@ -64,11 +64,6 @@
 .form-group
   margin: 0 0 10px 0
 
-.button
-  border-radius: 1px !important
-  text-shadow: none !important
-  box-shadow: 0 2px 3px rgba(0,0,0,0.16), 0 1px 3px rgba(0,0,0,0.23)
-
 a:hover
   color: #4c7391
 a
@@ -78,9 +73,6 @@ a
   outline: 0
   -webkit-transition: color 0.25s
   transition: color 0.25s
-
-.button.primary
-  color: #777001
 
 input:not(.no-style), textarea:not(.no-style), .textfield:not(.no-style)
   padding-left: 8px
@@ -153,6 +145,14 @@ textarea ~ .input-bar:before, textarea ~ .input-bar:after
   display: block
   margin: 0 2px 4px 2px
 
+button
+  border-radius: 1px
+  text-shadow: none !important
+  box-shadow: 0 2px 3px rgba(0,0,0,0.16), 0 1px 3px rgba(0,0,0,0.23)
+
+button.primary
+  color: #777001
+
 button.primary.clear, button.primary.outline
   color: #b5a216
 
@@ -178,21 +178,32 @@ body.desktop button.primary:not(.disabled).clear:hover
   .q-panel-content
     padding: 10px
 
-
-.fade-enter-active, .fade-leave-active
-  transition: opacity .3s
-
-.fade-enter, .fade-leave-active
-  opacity: 0
-
-body
-  padding: 10px;
-
 pre
   background: #e8e8e8
   padding: 10px
   margin: 10px 0
   border-radius: 2px
+
+.form-container
+  background: #efefef
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.16), 0 2px 10px rgba(0, 0, 0, 0.12)
+  .form-header
+    background: #f4f4f4
+    color: #9f9f9f
+    padding: 10px 20px
+    font-family: PlayRegular
+    font-size: 20px
+    border-width: 1px 1px 0 1px
+    border-style: solid
+    border-color: #ddd
+    border-radius: 2px 2px 0 0
+  .form-body
+    background: #fff
+    padding: 10px
+    border-width: 1px
+    border-style: solid
+    border-color: #ddd
+
 
 .form
   display: flex
@@ -262,3 +273,6 @@ pre
 .drawer
   position: relative
   box-shadow: 0 0 9px 4px rgba(0, 0, 0, 0.22)
+
+.q-fab.opened .backdrop
+  background: rgba(88, 88, 88, 0.5)

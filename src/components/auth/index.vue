@@ -3,7 +3,7 @@
 </template>
 
 <script type="text/javascript">
-  import AppLayout from 'components/@common/layout/index.vue';
+  import AppLayout from 'components/common/layout/index.vue';
   import { mapActions } from 'vuex';
 
   export default {

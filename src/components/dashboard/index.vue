@@ -8,8 +8,8 @@
   // noinspection NpmUsedModulesInstalled
   import {mapActions} from 'vuex';
   // noinspection NpmUsedModulesInstalled
-  import Common from 'components/@common';
-  import AppLayout from 'components/@common/layout/index.vue';
+  import Common from 'components/common';
+  import AppLayout from 'components/common/layout/index.vue';
 
   // noinspection ReservedWordAsName
   export default {
@@ -52,6 +52,12 @@
           items: [
             {route: '/dashboard/registration/finances', icon: 'build', label: 'Financeiro'},
             {route: '/dashboard/registration/auxiliar', icon: 'build', label: 'Auxiliar'}
+          ]
+        },
+        {
+          label: 'Geral',
+          items: [
+            {route: '/dashboard/registration/category', icon: 'build', label: 'Categoria'}
           ]
         }
       ];

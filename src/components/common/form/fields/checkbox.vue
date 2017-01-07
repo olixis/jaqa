@@ -20,3 +20,8 @@
     }
   };
 </script>
+
+<style lang="stylus" rel="stylesheet/stylus">
+  .q-checkbox input + div:before
+    border: 1px solid #bdbdbd
+</style>

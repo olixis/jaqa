@@ -18,7 +18,9 @@
 
     <app-drawer v-if="hasDrawer" :drawer="drawer"></app-drawer>
 
-    <router-view class="app-router-view"></router-view>
+    <transition name="fast-slide">
+      <router-view class="app-router-view"></router-view>
+    </transition>
 
   </q-layout>
 </template>
@@ -27,10 +29,10 @@
   // noinspection NpmUsedModulesInstalled
   import {Events} from 'quasar';
 
-  import Common from 'components/@common';
-  import AppToolbar from 'components/@common/toolbar/index.vue';
-  import AppHeader from 'components/@common/header/index.vue';
-  import AppDrawer from 'components/@common/drawer/index.vue';
+  import Common from 'components/common';
+  import AppToolbar from 'components/common/toolbar/index.vue';
+  import AppHeader from 'components/common/header/index.vue';
+  import AppDrawer from 'components/common/drawer/index.vue';
 
   export default{
     extends: Common,
@@ -61,5 +63,9 @@
 
   .app-router-view
     width: 100%
+
+  .toolbar
+    button
+      box-shadow: none
 </style>
 

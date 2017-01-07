@@ -1,6 +1,6 @@
 <template>
   <q-drawer left-side :swipe-only="swipeOnly" ref="leftDrawer" v-bind:class="[forceOpen]">
-    <div class="toolbar light">
+    <div class="toolbar light" v-if="swipeOnly">
       <q-toolbar-title :padding="1">
         {{ AppName }}
       </q-toolbar-title>
@@ -13,9 +13,12 @@
         <div class="list-label">
           {{ group.label }}
         </div>
-        <q-drawer-link v-for="menu in group.items" :to="menu.route" :icon="menu.icon" exact>
-          {{ menu.label }}
-        </q-drawer-link>
+        <div class="item item-link drawer-closer" v-for="menu in group.items" @click="route(menu.route)">
+          <i class="item-primary">{{ menu.icon }}</i>
+          <div class="item-content">
+            {{ menu.label }}
+          </div>
+        </div>
 
       </div>
     </div>
@@ -23,7 +26,7 @@
 </template>
 
 <script type="text/javascript">
-  import Common from 'components/@common';
+  import Common from 'components/common';
   // noinspection NpmUsedModulesInstalled
   import {Events, Utils} from 'quasar';
 

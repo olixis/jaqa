@@ -6,7 +6,7 @@ services:
   # commands as well
   node-contasobcontrole.com.br:
     image: ambientum/node:7
-    container_name: csc-app.dev
+    container_name: node-contasobcontrole.com.br
     command: npm run dev
     volumes:
       - .:/var/www/app

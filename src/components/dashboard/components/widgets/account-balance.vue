@@ -21,7 +21,7 @@
 
 
 <script type="text/javascript">
-  import Common from 'components/@common';
+  import Common from 'components/common';
 
   // noinspection ReservedWordAsName
   export default {

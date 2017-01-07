@@ -11,7 +11,7 @@
 </template>
 
 <script type="text/javascript">
-  import Common from 'components/@common';
+  import Common from 'components/common';
   import AccountBalance from './widgets/account-balance.vue';
 
   // noinspection ReservedWordAsName

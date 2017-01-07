@@ -5,8 +5,8 @@
 <script type="text/javascript">
   // noinspection NpmUsedModulesInstalled
   import { mapActions } from 'vuex';
-  import Common from 'components/@common';
-  import AppLayout from 'components/@common/layout/index.vue';
+  import Common from 'components/common';
+  import AppLayout from 'components/common/layout/index.vue';
 
   export default {
     extends: Common,

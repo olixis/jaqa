@@ -1,39 +1,11 @@
 // noinspection JSUnresolvedVariable
-import {isUndefined, get as Get, set as Set, isArray} from 'lodash';
+import {isUndefined, isObject, isArray, get as Get, set as Set} from 'lodash';
 // noinspection NpmUsedModulesInstalled
 import {Events} from 'quasar';
-import {FormValidator} from 'components/@common/form';
-import Common from 'components/@common';
 
-const api = {
-  /**
-   * @param root
-   * @param action
-   * @returns {object}
-   */
-  form (root, action) {
-    return {
-      get: function (id) {
-        return new Promise(function (resolve) {
-          window.setTimeout(() => {
-            const data = {content: {name: 'William'}};
-            resolve(data);
-          }, 1000);
-        });
-      },
-      post: function (record, callback) {
-        return new Promise(function (resolve) {
-          window.setTimeout(() => {
-            if (callback) {
-              callback.call(this, record);
-            }
-            resolve(record);
-          }, 100);
-        });
-      }
-    }
-  }
-};
+import {FormValidator} from 'components/common/form';
+import Common from 'components/common';
+import api from 'services/api';
 
 const FormAbstract = {
   extends: Common,
@@ -201,7 +173,7 @@ const FormAbstract = {
      * @param callback
      */
     action (action, callback) {
-      return api.form(this.root, action).post(this.record, callback);
+      return api.form(this.root).send(this.record, callback, action);
     },
     /**
      * @param id
@@ -209,10 +181,16 @@ const FormAbstract = {
     fetch (id) {
       this.reset();
       if (id) {
-        api.form(this.root).get(id).then((data) => {
-          console.log(this.schema, this.recod, data.content);
-          this.record = this.fill(this.fill(this.schema, this.record), data.content);
-          this.propagate();
+        api.form(this.root).receive(id).then((data) => {
+          const record = data.content;
+          if (!record || !isObject(record)) {
+            return;
+          }
+          for (let name in this.record) {
+            if (this.record.hasOwnProperty(name) && record.hasOwnProperty(name)) {
+              this.set(name, record[name]);
+            }
+          }
         });
       }
     },

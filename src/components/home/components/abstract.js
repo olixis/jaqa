@@ -2,7 +2,7 @@
  * base home components
  */
 
-import Common from 'components/@common';
+import Common from 'components/common';
 
 export default {
   extends: Common,

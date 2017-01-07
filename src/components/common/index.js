@@ -1,5 +1,7 @@
 // default component
 import { mapGetters, mapActions } from 'vuex';
+// noinspection NpmUsedModulesInstalled
+import {Toast} from 'quasar';
 
 const Common = {
   computed: {
@@ -25,6 +27,9 @@ const Common = {
      * @param path
      */
     route (path) {
+      if (path.substring(0, 2) === './') {
+        path = this.$route.path + '/' + path.substring(2);
+      }
       this.$router.push({path});
     },
     /**
@@ -32,6 +37,30 @@ const Common = {
      */
     log (...args) {
       console.log(args);
+    },
+    toast (message, undo, icon) {
+      const common = this;
+      const button = !undo ? {} : {
+        label: 'Desfazer',
+        handler () {
+          const promise = undo();
+          if (promise.then) {
+            promise.then(() => {
+              common.toast('Pronto, desfeito!', null, 'settings_backup_restore');
+            });
+          }
+        },
+        color: '#ffeb3b'
+      };
+
+      Toast.create({
+        html: message,
+        icon: icon || 'done',
+        timeout: 10000,
+        // color: '#f8c1c1',
+        // bgColor: 'white',
+        button
+      });
     },
     ...mapActions(['changeTitle', 'changeMenu'])
   }

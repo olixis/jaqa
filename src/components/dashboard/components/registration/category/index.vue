@@ -1,17 +1,20 @@
 <template>
-  <div>
-    <button class="button info" @click="route('/dashboard/registration/finances/add')">Vai pro add</button>
+  <div class="app-content">
+    <button class="button info" @click="route('./add')">Vai pro add</button>
+    <br>
+    <br>
+    <button class="button info" @click="route('./edit/2')">Vai pro edit</button>
   </div>
 </template>
 
 
 <script type="text/javascript">
-  import Common from 'components/@common';
+  import Common from 'components/common';
 
   // noinspection ReservedWordAsName
   export default {
     extends: Common,
-    name: 'registration-finances',
+    name: 'registration-category',
     data () {
       return {};
     },

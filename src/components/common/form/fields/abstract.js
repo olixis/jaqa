@@ -2,7 +2,7 @@
 import {get as Get} from 'lodash';
 // noinspection NpmUsedModulesInstalled
 import { Events } from 'quasar';
-import Common from 'components/@common';
+import Common from 'components/common';
 
 export default {
   extends: Common,

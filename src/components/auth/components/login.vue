@@ -72,7 +72,7 @@
 <script type="text/javascript">
   // noinspection NpmUsedModulesInstalled
   //  import {Dialog, Toast} from 'quasar';
-  import {FormAbstract, FormDefaults, FString, FPassword, FCheckbox} from 'components/@common/form';
+  import {FormAbstract, FormDefaults, FString, FPassword, FCheckbox} from 'components/common/form';
 
   // import Lang from 'services/lang';
   // import Auth from '../services/auth';
