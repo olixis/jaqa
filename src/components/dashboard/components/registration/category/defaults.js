@@ -1,5 +1,5 @@
 // defaults
-import {FormDefaults} from 'components/common/form';
+import {FormDefaults} from 'components/common/crud/form';
 import {Utils} from 'quasar-framework';
 
 /**

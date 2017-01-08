@@ -25,7 +25,7 @@
    * PATCH /resource/12 - Partially updates resource #12
    * DELETE /resource/12 - Deletes resource #12
    */
-  import {FormAbstract, FDebugger, FString, FText, FPassword, FCheckbox} from 'components/common/form';
+  import {FormAbstract, FDebugger, FString, FText, FPassword, FCheckbox} from 'components/common/crud/form';
   import defaults from './defaults';
 
   // noinspection ReservedWordAsName

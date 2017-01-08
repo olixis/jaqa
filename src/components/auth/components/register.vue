@@ -52,7 +52,7 @@
 </template>
 
 <script type="text/javascript">
-  import {FormDefaults, FString, FPassword, FCheckbox} from 'components/common/form';
+  import {FormDefaults, FString, FPassword, FCheckbox} from 'components/common/crud/form';
   import FormAbstract from './abstract';
 
   const items = FormDefaults.apply({

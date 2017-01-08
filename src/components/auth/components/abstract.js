@@ -1,5 +1,5 @@
 // auth abstract form
-import {FormAbstract} from 'components/common/form';
+import {FormAbstract} from 'components/common/crud/form';
 
 // noinspection ReservedWordAsName
 export default {

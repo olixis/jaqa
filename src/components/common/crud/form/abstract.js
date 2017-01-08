@@ -3,7 +3,7 @@ import {isUndefined, isObject, isArray, get as Get, set as Set} from 'lodash';
 // noinspection NpmUsedModulesInstalled
 import {Events} from 'quasar';
 
-import {FormValidator} from 'components/common/form';
+import {FormValidator} from 'components/common/crud/form';
 import Common from 'components/common';
 import api from 'services/api';
 
@@ -181,7 +181,7 @@ const FormAbstract = {
      */
     reset () {
       this.record = this.clone(this.schema);
-      this.errors = this.clone(this.schema, false);
+      this.errors = this.clone(this.schema, true);
       this.propagate();
       return this;
     },

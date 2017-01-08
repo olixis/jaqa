@@ -11,7 +11,7 @@
     <div class="grid-container">
 
       <div class="grid-header no-rotate">
-        Categorias
+        Categories
         <div class="grid-toolbar">
           <q-pagination ref="paginationField" v-model="paginationModel"
                         :min="paginationLimit.min" :max="paginationLimit.max"></q-pagination>
@@ -48,7 +48,7 @@
 
 <script type="text/javascript">
   import {Utils, Toast, ActionSheet} from 'quasar-framework';
-  import {FormAbstract} from 'components/common/form';
+  import {FormAbstract} from 'components/common/crud/form';
   import defaults from './defaults';
 
   // noinspection ReservedWordAsName

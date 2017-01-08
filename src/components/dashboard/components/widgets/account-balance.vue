@@ -2,14 +2,14 @@
 
   <div class="card">
     <div class="card-title">
-      Saldo do Dia
+      Balance of the day
     </div>
     <div class="list no-border">
 
       <div class="item item-link">
         <i class="item-primary material-icons">trending_up</i>
         <div class="item-content has-secondary">
-          Banco do Brasil
+          Cash in hand
         </div>
         <span class="item-secondary">R$ 500,00</span>
       </div>
