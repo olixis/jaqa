@@ -1,0 +1,4 @@
+/**
+ * Vuex getters
+ */
+export default {};

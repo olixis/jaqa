@@ -1,0 +1,4 @@
+/**
+ * Vuex mutations
+ */
+export default {};

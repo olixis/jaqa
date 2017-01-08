@@ -1,0 +1,4 @@
+/**
+ * Vuex actions
+ */
+export default {};

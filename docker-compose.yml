@@ -1,0 +1,14 @@
+version: '2'
+
+services:
+  # Web server - For live reload and development
+  # This environment can be used to run npm and node
+  # commands as well
+  node-contasobcontrole.com.br:
+    image: ambientum/node:7
+    container_name: node-contasobcontrole.com.br
+    command: npm run dev
+    volumes:
+      - .:/var/www/app
+    ports:
+      - 80:8081
