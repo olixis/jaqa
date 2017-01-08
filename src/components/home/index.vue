@@ -10,7 +10,6 @@
 
 <script type="text/javascript">
   // noinspection NpmUsedModulesInstalled
-  import { mapActions } from 'vuex';
   import Common from 'components/common';
   import AppLayout from 'components/common/layout/index.vue';
 
@@ -23,17 +22,14 @@
     mounted () {
       const menu = [
         {'route': '/home', 'label': 'Home'},
-        {'route': '/home/resources', 'label': 'Recursos'},
-        {'route': '/home/apps', 'label': 'Aplicativos'},
+        {'route': '/home/resources', 'label': 'Resources'},
+        {'route': '/home/apps', 'label': 'Apps'},
         {'route': '/blog/index', 'label': 'Blog'},
-        {'route': '/blog/testimonials', 'label': 'Depoimentos'},
-        {'route': '/home/who-we-are', 'label': 'Quem Somos'}
+        {'route': '/blog/testimonials', 'label': 'Testimonials'},
+        {'route': '/home/who-we-are', 'label': 'Us'}
       ];
       // noinspection JSValidateTypes
       this.changeMenu(menu);
-    },
-    methods: {
-      ...mapActions(['changeMenu'])
     }
   };
 </script>

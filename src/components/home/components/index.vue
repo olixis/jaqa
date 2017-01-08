@@ -1,43 +1,29 @@
 <template>
   <div class="container">
-    <div class="row md-column">
-      <div class="auto">
-        <div class="jumbotron">
-          <h3 class="font-play-regular">Controle Total!</h3>
-          <p> {{ leadUserEmail }}
-            O <strong>{{ AppName }}</strong> foi feito para você que quer saber exatamente o que está
-            recebendo
-            e o que
-            está pagando.
-          </p>
-          <p>
-            De forma rápida e simples você cria a sua conta e já sai usando!
-          </p>
-
-          <form action="_self" onsubmit="return false;">
-            <div class="row sm-column">
-              <div class="width-2of3" style="padding: 2px 4px 0 0;">
-                <input type="email" class="input input-lg" v-model="email" placeholder="Informe seu melhor e-mail..."
-                       style="height: 46px;" required="">
-                <span class="input-bar"/>
-              </div>
-              <div class="auto" style="padding: 0 4px 0 0;">
-                <button class="button primary big full-width" :disabled="isDisabled" @click="register()">Começar Grátis
-                </button>
-              </div>
-            </div>
-
-          </form>
-
-          <div class="clearfix"></div>
-        </div>
-      </div>
-
-      <div class="width-2of5 desktop-only has-text-right">
-        <img src="statics/images/figura.png">
-      </div>
+    <div class="layout-padding">
+      <h4>This is {{ AppName }}</h4>
+      <blockquote>
+        <small>
+          This view contains two drawers. One on left and one on right.
+          <span class="desktop-only">Click</span> <span class="mobile-only">Tap</span> on menu buttons from top-left
+          or top-right corners of the screen, or swipe the
+          Drawers into view from the left or right edge of screen.
+        </small>
+      </blockquote>
+      <p>
+        The Quasar Layout Drawer (also known as a Sidebar) is the element on the left
+        side (or right side!) of your screen, usually used for Navigation, which gets
+        hidden on smaller screens and is shown alongside the Page content on wide
+        enough screens.
+      </p>
+      <p>
+        Drawers can be activated by swiping them into view from the edge of the screen
+        or by clicking/tapping on menu buttons. Their position is based on how you
+        structure the layout template. You can, for instance, display a Drawer on right
+        side of screen on big screens but swipe them from left on smaller screens.
+        It's up to you and where you place the Drawer HTML tag.
+      </p>
     </div>
-
   </div>
 </template>
 

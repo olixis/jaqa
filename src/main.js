@@ -13,19 +13,11 @@ Vue.use(Quasar);
 
 Quasar.start(() => {
   /* eslint-disable no-new */
-  const href = false;
 
-  const app = new Vue({
+  new Vue({
     el: '#quasar-app',
     store: store,
     router: router,
     render: h => h(App)
   });
-
-  if (href) {
-    window.addEventListener('hashchange', (hash) => {
-      let url = hash.newURL.substr(hash.newURL.indexOf('#') + 1);
-      app.currentView = (url === '/' ? 'main' : url.replace(/\//g, ''));
-    });
-  }
 });

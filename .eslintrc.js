@@ -9,7 +9,8 @@ module.exports = {
   globals: {
     '__THEME': true,
     'cordova': true,
-    'Velocity': true
+    'Velocity': true,
+    'DEFAULTS': true,
   },
   // https://github.com/feross/standard/blob/master/RULES.md#javascript-standard-style
   extends: 'standard',

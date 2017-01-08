@@ -5,7 +5,7 @@ var
   config = require('../config'),
   utils = require('./utils'),
   projectRoot = path.resolve(__dirname, '../'),
-  autoprefixer = require('autoprefixer')
+  autoprefixer = require('autoprefixer');
 
 // check env & config/index.js to decide weither to enable CSS Sourcemaps for the
 // various preprocessor loaders added to vue-loader at the end of this file
@@ -32,7 +32,8 @@ module.exports = {
       'src': path.resolve(__dirname, '../src'),
       'assets': path.resolve(__dirname, '../src/assets'),
       'components': path.resolve(__dirname, '../src/components'),
-      'services': path.resolve(__dirname, '../src/services')
+      'services': path.resolve(__dirname, '../src/services'),
+      'defaults': path.resolve(__dirname, '../src/defaults')
     }
   },
   resolveLoader: {
@@ -91,6 +92,9 @@ module.exports = {
   },
   plugins: [
     new webpack.optimize.DedupePlugin(),
-    new webpack.optimize.OccurenceOrderPlugin()
+    new webpack.optimize.OccurenceOrderPlugin(),
+    new webpack.ProvidePlugin({
+      'DEFAULTS': 'defaults'
+    })
   ]
-}
+};

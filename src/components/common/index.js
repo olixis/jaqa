@@ -1,8 +1,6 @@
 // default component
 import {mapGetters, mapActions} from 'vuex';
-// noinspection NpmUsedModulesInstalled
-import {Toast, Loading} from 'quasar';
-// noinspection NpmUsedModulesInstalled
+import {Toast, Dialog, Loading} from 'quasar-framework';
 import {isUndefined as _isUndefined, isFunction as _isFunction} from 'lodash';
 
 import {Lang} from 'services/lang';
@@ -58,7 +56,9 @@ const Common = {
         visibility = Loading.isActive();
       }
       if (visibility) {
-        Loading.show();
+        Loading.show({
+          delay: 0
+        });
       }
       else {
         Loading.hide();
@@ -97,6 +97,51 @@ const Common = {
         // bgColor: 'white',
         button
       });
+    },
+    /**
+     * @param title
+     * @param message
+     */
+    alert (title, message) {
+      this.dialog({title, message});
+    },
+    /**
+     * @param title
+     * @param message
+     * @param agree
+     * @param disagree
+     */
+    confirm (title, message, agree, disagree) {
+      let buttons = [
+        {
+          label: 'Disagree',
+          handler () {
+            if (_isFunction(disagree)) {
+              disagree();
+            }
+          }
+        },
+        {
+          label: 'Agree',
+          handler () {
+            if (_isFunction(agree)) {
+              agree();
+            }
+          }
+        }
+      ];
+
+      this.dialog({
+        title,
+        message,
+        buttons
+      });
+    },
+    /**
+     * @param options
+     */
+    dialog (options) {
+      Dialog.create(options);
     },
     /**
      * @param scope

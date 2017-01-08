@@ -15,10 +15,12 @@ const FormAbstract = {
       record: {},
       errors: {},
       items: {},
+      messages: {
+        success: 'Tudo certo!'
+      },
       root: 'unknown',
       isValid: false,
-      isAvailable: true,
-      debug: true
+      isAvailable: true
     };
   },
   computed: {
@@ -37,8 +39,9 @@ const FormAbstract = {
    * on events
    */
   mounted () {
+    this.reset();
     Events.$on('form-synchronize', (data) => {
-      this.synchronize(data.field, data.value, data.propagate);
+      this.synchronize(data.field, data.value);
     });
   },
   /**
@@ -76,6 +79,12 @@ const FormAbstract = {
       return Get(this.record, field);
     },
     /**
+     * @param field
+     */
+    has (field) {
+      return typeof this.record[field] !== 'undefined';
+    },
+    /**
      * @returns {FormAbstract}
      */
     validation () {
@@ -101,15 +110,32 @@ const FormAbstract = {
       if (isArray(this.$children)) {
         for (let i in this.$children) {
           if (this.$children.hasOwnProperty(i)) {
-            let child = this.$children[i];
-            if (child.trigger) {
-              child.trigger('record', this.record);
-              child.trigger('error', this.errors[child.options['field']] ? 'error' : '');
+            let element = this.$children[i];
+            if (element.trigger) {
+              element.trigger('record', this.record, element);
+              element.trigger('errors', this.errors, element);
             }
           }
         }
       }
       return this;
+    },
+    /**
+     * @param property
+     * @param value
+     * @param form
+     */
+    trigger (property, value, form) {
+      if (isArray(form.$children)) {
+        for (let i in form.$children) {
+          if (form.$children.hasOwnProperty(i)) {
+            let child = form.$children[i];
+            if (child.trigger) {
+              child.trigger(property, value);
+            }
+          }
+        }
+      }
     },
     /**
      * @param field
@@ -120,17 +146,20 @@ const FormAbstract = {
       return {field, value};
     },
     /**
-     * @param e
+     * @param element
+     * @param empty
      * @returns {*}
      */
-    clone (e) {
-      if (e === null || typeof e !== 'object') {
-        return e;
+    clone (element, empty) {
+      empty = isUndefined(empty) ? false : empty;
+
+      if (element === null || typeof element !== 'object') {
+        return element;
       }
-      let c = e.constructor();
-      for (let a in e) {
-        if (e.hasOwnProperty(a)) {
-          c[a] = e[a];
+      let c = element.constructor();
+      for (let a in element) {
+        if (element.hasOwnProperty(a)) {
+          c[a] = empty ? null : element[a];
         }
       }
       return c;
@@ -152,6 +181,8 @@ const FormAbstract = {
      */
     reset () {
       this.record = this.clone(this.schema);
+      this.errors = this.clone(this.schema, false);
+      this.propagate();
       return this;
     },
     /**
@@ -184,7 +215,9 @@ const FormAbstract = {
     fetch (id) {
       this.reset();
       if (id) {
+        this.load(true);
         api.form(this.root).receive(id).then((data) => {
+          this.load(false);
           const record = data.content;
           if (!record || !isObject(record)) {
             return;
@@ -208,6 +241,43 @@ const FormAbstract = {
           return !!value;
       }
       return value;
+    },
+    /**
+     * @param record
+     */
+    undoing (record) {
+      this.load(true);
+      return new Promise((resolve) => {
+        window.setTimeout(() => {
+          console.log('undoing: ', JSON.stringify(record));
+          this.load(false);
+          resolve(true);
+        }, 1000)
+      });
+    },
+    /**
+     */
+    save () {
+      this
+        .load(true)
+        .action(this.param)
+        .then((record) => {
+          this.success(record);
+        })
+        .catch();
+    },
+    /**
+     * @param record
+     */
+    success (record) {
+      this.load(false);
+      let undo = null;
+      if (this.undo) {
+        undo = () => {
+          return this.undoing(record);
+        }
+      }
+      this.toast(this.messages.success, undo);
     }
   }
 };

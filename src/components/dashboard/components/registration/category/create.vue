@@ -14,6 +14,7 @@
       <button class="primary circular button-fab" @click="route('/create')">
         <i>add</i>
       </button>
+
       <div is="f-debugger" :items="items"></div>
     </div>
   </form-abstract>
@@ -30,13 +31,13 @@
     },
     data () {
       return {
-        operation: 'update',
+        operation: 'store',
         undo: true
       };
     },
-    name: 'registration-category-edit',
+    name: 'registration-category-create',
     mounted () {
-      this.fetch(this.$route.params.id);
+      this.fetch();
     }
   };
 </script>

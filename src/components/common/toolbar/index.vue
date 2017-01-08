@@ -9,10 +9,10 @@
 
     <div v-show="hasMenu" class="app-toolbar-left app-toolbar-buttons">
       <button @click="route('/auth/login')">
-        <i class="material-icons">&#xE7FD;</i> Entrar
+        <i class="material-icons">&#xE7FD;</i> Log in
       </button>
       <button @click="route('/fale-conosco')">
-        <i class="material-icons">help_outline</i> Fale Conosco
+        <i class="material-icons">help_outline</i> Support
       </button>
     </div>
 

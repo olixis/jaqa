@@ -79,9 +79,16 @@ export default {
      */
     trigger (property, value) {
       this[property] = value;
-      if (property === 'record' && this.record[this.option('field')] !== this.value) {
-        this.propagate = false;
-        this.value = this.parse(this.record[this.option('field')]);
+      switch (property) {
+        case 'record':
+          if (this.record[this.option('field')] !== this.value) {
+            this.propagate = false;
+            this.value = this.parse(value[this.option('field')]);
+          }
+          break;
+        case 'errors':
+          this.error = value[this.option('field')];
+          break;
       }
       this.$nextTick();
     }

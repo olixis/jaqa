@@ -1,40 +1,28 @@
 <template>
   <div class="container">
     <div class="layout-padding">
-      <p class="caption">Basic Toasts</p>
-      <p class="group">
-        <button class="button primary" @click="basicToast()">
-          Default Toast
-        </button>
-
-        <button class="button primary" @click="basicToastWithLongMessage()">
-          Default Toast with Long Message
-        </button>
+      <h4>Who we are?</h4>
+      <p>
+        Mussum Ipsum, cacilds vidis litro abertis. Sapien in monti palavris qui num significa nadis i pareci latim. Quem
+        manda na minha terra sou Euzis! Vehicula non. Ut sed ex eros. Vivamus sit amet nibh non tellus tristique
+        interdum. undefined
       </p>
-
-      <p class="caption">Types of Toasts</p>
-      <p class="group">
-        <button v-for="type in types" :class="'button ' + type" @click="toastWithType(type)">
-          {{ capitalize(type) }} Toast
-        </button>
+      <p>
+        Atirei o pau no gatis, per gatis num morreus. Casamentiss faiz malandris se pirulitá. Diuretics paradis num copo
+        é motivis de denguis. Paisis, filhis, espiritis santis.
       </p>
-
-      <p class="caption">Toasts with Options</p>
-      <p class="group">
-        <button class="button primary" @click="toastWithIcon()">
-          Toast With an Icon
-        </button>
-
-        <button class="button primary" @click="toastWithButton()">
-          Toast With a Button
-        </button>
+      <p>
+        Admodum accumsan disputationi eu sit. Vide electram sadipscing et per. Praesent malesuada urna nisi, quis
+        volutpat erat hendrerit non. Nam vulputate dapibus. Praesent vel viverra nisi. Mauris aliquet nunc non turpis
+        scelerisque, eget. Si num tem leite então bota uma pinga aí cumpadi!
+      </p>
     </div>
   </div>
 </template>
 
 <script type="text/javascript">
   // noinspection NpmUsedModulesInstalled
-  import { Toast } from 'quasar';
+  import {Toast} from 'quasar';
   import HomeAbstract from './abstract';
 
   export default {

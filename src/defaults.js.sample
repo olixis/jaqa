@@ -1,0 +1,4 @@
+
+module.exports = {
+  AppName: 'Just Another Quasar App'
+};

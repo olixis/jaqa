@@ -1,15 +1,15 @@
 <template>
-  <div class="app-content">
+  <div class="app-content app-auth">
 
-    <video autoplay loop id="video-background" v-bind:class="opaque" muted>
-      <source src="statics/videos/445220196.mp4" type="video/mp4">
+    <video autoplay loop id="video-background" :class="opaque" muted>
+      <source src="statics/videos/auth.mp4" type="video/mp4">
     </video>
 
     <div class="q-panel q-login">
 
       <div class="q-panel-header">
           <span class="font-play-regular">
-            Entrar
+            Sig in
           </span>
       </div>
 
@@ -26,13 +26,15 @@
             <div class="field" :options="item('remember')" is="f-checkbox"></div>
 
             <div class="field">
-              <button @click="login" class="button primary full-width q-login-button"> Entrar</button>
+              <button @click="authLogin" class="button primary full-width q-login-button" :disabled="!isValid">
+                Log In
+              </button>
             </div>
 
             <div class="field">
               <router-link to="/auth/reset" class="indigo">
                 <i class="material-icons">help_outline</i>
-                <small>Esqueci minha senha</small>
+                <small>I forgotten my password</small>
               </router-link>
             </div>
 
@@ -46,17 +48,17 @@
 
           <div class="column-right">
 
-            <p class="text-faded">Conecte-se com</p>
+            <p class="text-faded">Connect with</p>
             <button class="button indigo button-facebook" @click="requestAccess()">
               Facebook
             </button>
 
             <hr>
 
-            <p class="text-faded">Crie uma nova conta</p>
+            <p class="text-faded">Create a new account</p>
             <button class="button positive full-width text-left" @click="route('/auth/register')">
               <i class="material-icons">monetization_on</i>
-              Conta Sob Controle
+              {{ AppName }}
             </button>
           </div>
 
@@ -70,18 +72,15 @@
 </template>
 
 <script type="text/javascript">
-  // noinspection NpmUsedModulesInstalled
-  //  import {Dialog, Toast} from 'quasar';
-  import {FormAbstract, FormDefaults, FString, FPassword, FCheckbox} from 'components/common/form';
+  import {FormDefaults, FString, FPassword, FCheckbox} from 'components/common/form';
+  import FormAbstract from './abstract';
 
-  // import Lang from 'services/lang';
-  // import Auth from '../services/auth';
   import Facebook from '../services/facebook';
 
   const items = FormDefaults.apply({
-    'login': {name: 'login', label: 'Login', autofocus: true},
-    'password': {name: 'password', label: 'Senha'},
-    'remember': {name: 'remember', label: 'Manter-me conectado'}
+    'login': {name: 'login', label: 'User', validator: 'email', autofocus: true},
+    'password': {name: 'password', label: 'Password', validator: 'password'},
+    'remember': {name: 'remember', label: 'Keep me connected'}
   });
 
   // noinspection ReservedWordAsName
@@ -93,50 +92,18 @@
     },
     data () {
       return {
-        items: items,
-        isActive: false
-      }
-    },
-    mounted () {
-      this.fetch();
-      this.load();
-    },
-    computed: {
-      opaque () {
-        return this.isActive ? 'opaque' : '';
+        items
       }
     },
     methods: {
-      load () {
-        // noinspection JSUnresolvedVariable
-        const email = this.$route.query.email;
-        if (email) {
-          this.user.email = email;
-        }
-        // noinspection JSUnresolvedVariable
-        if (this.$refs.autofocus) {
-          // noinspection JSUnresolvedVariable
-          this.$refs.autofocus.focus();
-        }
-        // noinspection JSUnresolvedVariable
-        this.isActive = true;
+      authLogin () {
+        this
+          .action('login')
+          .then(() => {
+            this.route('/dashboard/home');
+          });
       },
-      login () {
-        this.route('/dashboard');
-        // const dialog = (message) => {
-        //   Dialog.create({
-        //     title: Lang.get('auth', 'dialog'),
-        //     message: message + '[meleca]'
-        //   });
-        // };
-        // Auth.login()
-        //         .then((response) => {
-        //           dialog(Lang.get('auth', 'successful'));
-        //         }).catch((response) => {
-        //   dialog(Lang.get('auth', 'failed'));
-        // });
-      },
-      requestAccess () {
+      authRequestAccess () {
         Facebook.requestAccess();
       }
     }

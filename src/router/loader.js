@@ -6,7 +6,6 @@
 // noinspection JSUnusedLocalSymbols
 export const RouterLoader = {
   load (name) {
-    console.log(name);
     // noinspection JSUnresolvedVariable, ES6ModulesDependencies
     if (process.env.NODE_ENV === 'development') {
       // noinspection JSUnresolvedFunction

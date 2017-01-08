@@ -1,6 +1,8 @@
 <template>
   <div class="container">
-    Resources
+    <div class="layout-padding">
+      <h4>Resources of {{ AppName }}</h4>
+    </div>
   </div>
 </template>
 

@@ -1,7 +1,7 @@
 /**
  * Vuex state
  */
-const label = 'Conta Sob Controle';
+const label = DEFAULTS.AppName;
 
 export default {
   app: {
