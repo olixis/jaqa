@@ -5,6 +5,9 @@
 ## Build Setup
 
 ``` bash
+# copy env settings
+cp src/defaults.js.sample src/defaults.js
+
 # install dependencies
 npm install
 
