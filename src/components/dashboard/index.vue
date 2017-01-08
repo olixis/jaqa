@@ -1,6 +1,10 @@
 <template>
   <div>
-    <app-layout drawer="true" header="" left="popover" :popover="popover"></app-layout>
+    <app-layout drawer="true" header="" left="popover" :popover="popover">
+      <div slot="content">
+        <router-view></router-view>
+      </div>
+    </app-layout>
   </div>
 </template>
 

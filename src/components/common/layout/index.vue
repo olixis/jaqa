@@ -18,9 +18,9 @@
 
     <app-drawer v-if="hasDrawer" :drawer="drawer"></app-drawer>
 
-    <transition name="fast-slide">
-      <router-view class="app-router-view"></router-view>
-    </transition>
+    <div class="layout-view app-layout">
+      <slot name="content"></slot>
+    </div>
 
   </q-layout>
 </template>
@@ -51,7 +51,7 @@
     },
     methods: {
       toggleDrawer () {
-        Events.$emit('app-drawer.toggle-left');
+        Events.$emit('app-drawer.toggle-left', true);
       }
     }
   };
@@ -60,9 +60,6 @@
 <style lang="stylus" rel="stylesheet/stylus">
   .toolbar.light, .font-play-regular
     font-family: PlayRegular
-
-  .app-router-view
-    width: 100%
 
   .toolbar
     button

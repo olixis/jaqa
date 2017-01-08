@@ -8,21 +8,22 @@
         <div class="form">
           <div class="field" :options="item('name')" is="f-string"></div>
           <div is="f-text" class="field" :options="item('note')"></div>
-          <div class="field">
-            <button @click="save" class="button primary" :disabled="!isValid"> Salvar</button>
-          </div>
         </div>
+      </div>
+      <div class="form-bottom">
+        <button @click="save" class="button primary" :disabled="!isValid"> Salvar</button>
+        <button @click="route('/')" class="button primary clear"> Fechar </button>
       </div>
     </div>
   </div>
 </template>
 
 <script type="text/javascript">
-  import Form from './form-abstract';
+  import FormAbstract from './abstract';
 
   // noinspection ReservedWordAsName
   export default {
-    extends: Form,
+    extends: FormAbstract,
     name: 'registration-category-add',
     mounted () {
       this.fetch();

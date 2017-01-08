@@ -1,5 +1,5 @@
 <template>
-  <div class="app-toolbar">
+  <div class="app-toolbar no-rotate">
     <span class="app-toolbar-title" @click="route('/home')">
       {{ AppName }}
     </span>

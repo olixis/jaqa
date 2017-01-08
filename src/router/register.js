@@ -19,7 +19,7 @@ export const RouterRegister = {
       if (route.children && route.children.forEach) {
         RouterRegister.register(children, route.children);
       }
-      routes.push({ path: route.path, component: component, name: route.name, children: children });
+      routes.push({ path: route.path, component: component, name: route.name, meta: route.meta, children: children });
     });
   }
 }

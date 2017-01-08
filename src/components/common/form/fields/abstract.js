@@ -17,8 +17,8 @@ export default {
     }
   },
   computed: {
-    name () {
-      return this.option('name');
+    field () {
+      return this.option('field');
     },
     label () {
       return this.option('label');
@@ -52,7 +52,7 @@ export default {
      */
     synchronize (value, propagate) {
       const data = {
-        name: this.name,
+        field: this.field,
         value: (value && value.target) ? value.target.value : value,
         propagate: propagate
       };
@@ -79,10 +79,9 @@ export default {
      */
     trigger (property, value) {
       this[property] = value;
-      if (property === 'record' && this.record[this.option('name')] !== this.value) {
+      if (property === 'record' && this.record[this.option('field')] !== this.value) {
         this.propagate = false;
-        console.log(this.record[this.option('name')], this.value);
-        this.value = this.parse(this.record[this.option('name')]);
+        this.value = this.parse(this.record[this.option('field')]);
       }
       this.$nextTick();
     }

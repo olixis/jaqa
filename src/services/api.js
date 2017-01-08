@@ -19,7 +19,7 @@ const api = {
               callback.call(this, record);
             }
             resolve(record);
-          }, 100);
+          }, 1000);
         });
       },
       receive: function (id, action) {

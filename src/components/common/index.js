@@ -1,9 +1,18 @@
 // default component
-import { mapGetters, mapActions } from 'vuex';
+import {mapGetters, mapActions} from 'vuex';
 // noinspection NpmUsedModulesInstalled
-import {Toast} from 'quasar';
+import {Toast, Loading} from 'quasar';
+// noinspection NpmUsedModulesInstalled
+import {isUndefined as _isUndefined, isFunction as _isFunction} from 'lodash';
+
+import {Lang} from 'services/lang';
 
 const Common = {
+  data () {
+    return {
+      base: ''
+    }
+  },
   computed: {
     ...mapGetters(['AppName', 'AppMenu'])
   },
@@ -30,6 +39,7 @@ const Common = {
       if (path.substring(0, 2) === './') {
         path = this.$route.path + '/' + path.substring(2);
       }
+      path = this.base + path;
       this.$router.push({path});
     },
     /**
@@ -38,20 +48,46 @@ const Common = {
     log (...args) {
       console.log(args);
     },
+    /**
+     * @param visibility
+     * @param callback
+     * @returns {Common}
+     */
+    load (visibility, callback) {
+      if (_isUndefined(visibility)) {
+        visibility = Loading.isActive();
+      }
+      if (visibility) {
+        Loading.show();
+      }
+      else {
+        Loading.hide();
+      }
+      if (_isFunction(callback)) {
+        callback();
+      }
+      return this;
+    },
+    /**
+     * @param message
+     * @param undo
+     * @param icon
+     */
     toast (message, undo, icon) {
       const common = this;
-      const button = !undo ? {} : {
+      const action = {
         label: 'Desfazer',
         handler () {
           const promise = undo();
-          if (promise.then) {
+          if (promise && promise.then) {
             promise.then(() => {
-              common.toast('Pronto, desfeito!', null, 'settings_backup_restore');
+              common.toast('Pronto, desfeito!', null, 'restore');
             });
           }
         },
         color: '#ffeb3b'
       };
+      const button = !undo ? {} : action;
 
       Toast.create({
         html: message,
@@ -61,6 +97,14 @@ const Common = {
         // bgColor: 'white',
         button
       });
+    },
+    /**
+     * @param scope
+     * @param i18n
+     * @returns {*}
+     */
+    lang (scope, i18n) {
+      return Lang.get(scope, i18n);
     },
     ...mapActions(['changeTitle', 'changeMenu'])
   }

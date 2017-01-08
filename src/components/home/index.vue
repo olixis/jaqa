@@ -1,5 +1,11 @@
 <template>
-  <app-layout drawer="" header="true" left="menu"></app-layout>
+  <app-layout drawer="" header="true" left="menu">
+    <div slot="content">
+      <transition name="fast-slide">
+        <router-view></router-view>
+      </transition>
+    </div>
+  </app-layout>
 </template>
 
 <script type="text/javascript">

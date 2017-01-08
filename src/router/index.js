@@ -1,16 +1,15 @@
-/**
- * VueRouter
- */
 import Vue from 'vue';
-import VueRouter from 'vue-router';
+import Router from 'vue-router';
 
 import { RouterRegister } from './register';
+import beforeEach from './beforeEach'
 
 import { router as home } from 'components/home';
 import { router as dashboard } from 'components/dashboard';
 import { router as auth } from 'components/auth';
 
-Vue.use(VueRouter);
+// noinspection JSCheckFunctionSignatures
+Vue.use(Router);
 
 const routes = [
   { path: '/', redirect: '/home' }
@@ -24,7 +23,11 @@ RouterRegister.register(routes, [
   {path: '*', component: 'error/404'}
 ]);
 
-export default new VueRouter({
+const router = new Router({
   routes: routes
-})
+});
 
+// noinspection JSCheckFunctionSignatures
+router.beforeEach(beforeEach);
+
+export default router;

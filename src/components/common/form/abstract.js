@@ -27,7 +27,7 @@ const FormAbstract = {
       const i = this.items;
       for (let a in i) {
         if (i.hasOwnProperty(a)) {
-          schema[i[a]['name']] = isUndefined(i[a]['defaults']) ? '' : i[a]['defaults'];
+          schema[i[a]['field']] = isUndefined(i[a]['defaults']) ? '' : i[a]['defaults'];
         }
       }
       return schema;
@@ -38,7 +38,7 @@ const FormAbstract = {
    */
   mounted () {
     Events.$on('form-synchronize', (data) => {
-      this.synchronize(data.name, data.value, data.propagate);
+      this.synchronize(data.field, data.value, data.propagate);
     });
   },
   /**
@@ -49,31 +49,31 @@ const FormAbstract = {
   },
   methods: {
     /**
-     * @param name
+     * @param field
      * @param value
      * @returns {FormAbstract}
      */
-    synchronize (name, value) {
-      this.set(name, value);
+    synchronize (field, value) {
+      this.set(field, value);
       return this;
     },
     /**
-     * @param name
+     * @param field
      * @param value
      * @returns {FormAbstract}
      */
-    set (name, value) {
-      this.record[name] = this.format(value, this.item(name + '.type'));
-      this.change(name, value);
+    set (field, value) {
+      this.record[field] = this.format(value, this.item(field + '.type'));
+      this.change(field, value);
       this.validation();
       this.propagate();
       return this;
     },
     /**
-     * @param name
+     * @param field
      */
-    get (name) {
-      return Get(this.record, name);
+    get (field) {
+      return Get(this.record, field);
     },
     /**
      * @returns {FormAbstract}
@@ -81,10 +81,10 @@ const FormAbstract = {
     validation () {
       let record = this.clone(this.record);
       let isValid = true;
-      for (let name in record) {
-        if (record.hasOwnProperty(name) && this.item(name + '.validator')) {
-          let error = FormValidator.apply(this.item(name + '.validator'), record[name], record);
-          this.errors[name] = error;
+      for (let field in record) {
+        if (record.hasOwnProperty(field) && this.item(field + '.validator')) {
+          let error = FormValidator.apply(this.item(field + '.validator'), record[field], record);
+          this.errors[field] = error;
           if (error) {
             isValid = false;
           }
@@ -101,20 +101,23 @@ const FormAbstract = {
       if (isArray(this.$children)) {
         for (let i in this.$children) {
           if (this.$children.hasOwnProperty(i)) {
-            this.$children[i].trigger('record', this.record);
-            this.$children[i].trigger('error', this.errors[this.$children[i].options['name']] ? 'error' : '');
+            let child = this.$children[i];
+            if (child.trigger) {
+              child.trigger('record', this.record);
+              child.trigger('error', this.errors[child.options['field']] ? 'error' : '');
+            }
           }
         }
       }
       return this;
     },
     /**
-     * @param name
+     * @param field
      * @param value
      * @returns {object}
      */
-    change (name, value) {
-      return {name, value};
+    change (field, value) {
+      return {field, value};
     },
     /**
      * @param e
@@ -186,9 +189,9 @@ const FormAbstract = {
           if (!record || !isObject(record)) {
             return;
           }
-          for (let name in this.record) {
-            if (this.record.hasOwnProperty(name) && record.hasOwnProperty(name)) {
-              this.set(name, record[name]);
+          for (let field in this.record) {
+            if (this.record.hasOwnProperty(field) && record.hasOwnProperty(field)) {
+              this.set(field, record[field]);
             }
           }
         });

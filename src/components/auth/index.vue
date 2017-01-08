@@ -1,10 +1,16 @@
 <template>
-  <app-layout drawer="" header="" left="menu"></app-layout>
+  <app-layout drawer="" header="" left="menu">
+    <div slot="content">
+      <transition name="fast-slide">
+        <router-view></router-view>
+      </transition>
+    </div>
+  </app-layout>
 </template>
 
 <script type="text/javascript">
   import AppLayout from 'components/common/layout/index.vue';
-  import { mapActions } from 'vuex';
+  import {mapActions} from 'vuex';
 
   export default {
     name: 'auth',
